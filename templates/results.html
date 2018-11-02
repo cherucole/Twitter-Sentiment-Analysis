@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="results-graph col-md-6">
+    <div class="col-md-6">
+        <canvas id="myChart"
+                width="250"
+                height="250"></canvas>
+        <script>
+            var ctx = document.getElementById("myChart");
+            var pos = JSON.parse('{{positive}}')
+            var neut = JSON.parse('{{neutral}}')
+            var neg = JSON.parse('{{negative}}')
+            console.log(pos)
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ["Positive", "Neutral", "Negative"],
+                    datasets: [{
+                        label: 'of 500 sample anayzed tweet',
+                        data: [pos, neut, neg],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+
+                        ],
+                        borderColor: [
+                            'rgba(255,99,132,1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                        ],
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        </script>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Negative twites</h2>
+
+            </div>
+            {% for tweet in nagative_tweets %}
+            <div class="card-body">
+                {{ tweet }}
+
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+    {% endblock %}
