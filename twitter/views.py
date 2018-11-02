@@ -42,14 +42,16 @@ def analyse(request):
         input_hastag = user_input.cleaned_data['q']
         # print(input_hastag)
         data = getdata(input_hastag)
+        topic = data['Topic']
+        sample = data['Sample']
         positive = data['Positive']
         neutral = data['Neutral']
         negative = data['Negative']
         nagative_tweets = data['Nagative_tweets'][0:3]
-        neutral_tweets = data['Neutral_tweets']
-        postive_tweets = data['Postive_tweets']
+        neutral_tweets = data['Neutral_tweets'][0:3]
+        postive_tweets = data['Postive_tweets'][0:3]
         print(data['Positive'])
         print(nagative_tweets)
         print(data)
-        return render(request, "results.html", {'data': data, 'positive': positive, 'neutral': neutral, 'negative': negative, 'nagative_tweets': nagative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'nagative_tweets': nagative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "home.html", {'input_hastag': user_input})
