@@ -50,8 +50,12 @@ def analyse(request):
         nagative_tweets = data['Nagative_tweets'][0:3]
         neutral_tweets = data['Neutral_tweets'][0:3]
         postive_tweets = data['Postive_tweets'][0:3]
-        print(data['Positive'])
-        print(nagative_tweets)
-        print(data)
+
+        time_positive = data['time_positive']
+
+        listt = time_positive.keys()
+        # print(data['Positive'])
+        # print(nagative_tweets)
+        # print(data)
         return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'nagative_tweets': nagative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "home.html", {'input_hastag': user_input})

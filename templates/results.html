@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="results-graph col-md-6">
-    <h1>{{topic}}</h1>
-    <div class="col-md-6 d-flex justify-content-center">
-        <canvas id="myChart"
+<div class="d-flex flex-row">
+    <div class="results-pie col-md-6">
+        <h1>{{topic}}</h1>
+        <div class="col-md-6 d-flex justify-content-center">
+        <canvas id="pie-chart"
                 width="250"
                 height="250"></canvas>
         <script>
-            var ctx = document.getElementById("myChart");
+            var ctx = document.getElementById("pie-chart");
             var pos = JSON.parse('{{positive}}')
             var neut = JSON.parse('{{neutral}}')
             var neg = JSON.parse('{{negative}}')
             console.log(pos)
             var myChart = new Chart(ctx, {
-                type: 'pie',
+            type: 'polarArea',
                 data: {
                     labels: ["Positive", "Neutral", "Negative"],
                     datasets: [{
@@ -26,24 +27,57 @@
 
                         ],
                         borderColor: [
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 0, 0, 1)',
+                        ],
+                    }]
+                },
+            });
+        </script>
+    </div>
+    <div class="results-bar col-md-6">
+        <canvas id="bar-chart"
+                width="250"
+                height="250"></canvas>
+        <script>
+            var ctx = document.getElementById("bar-chart");
+            var pos = JSON.parse('{{positive}}')
+            var neut = JSON.parse('{{neutral}}')
+            var neg = JSON.parse('{{negative}}')
+            console.log(pos)
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Positive", "Neutral", "Negative"],
+                    datasets: [{
+                        label: 'of 500 sample anayzed tweet',
+                        data: [pos, neut, neg],
+                        backgroundColor: [
                             'rgba(0, 255, 0, 0.3)',
                             'rgba(54, 162, 235, 0.2)',
                             'rgba(255, 0, 0, 0.3)',
+
+                        ],
+                        borderColor: [
+                            'rgba(0, 255, 0, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 0, 0, 1)',
                         ],
                     }]
                 },
                 options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: 'Predicted world population (millions) in 2050'
                     }
                 }
             });
         </script>
     </div>
+</div>
+</div>
     <div class="container">
         <div class="card">
             <div class="card-header">

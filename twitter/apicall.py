@@ -14,8 +14,10 @@ def getdata(input_hashtag):
 
     N = 100  # number of tweets
     # Tweets = api.user_timeline(id=input_hashtag, count=N)
-    Tweets = tweepy.Cursor(api.search, q=input_hashtag, lang="en").items(N)
-
+    Tweets = tweepy.Cursor(api.search, q=input_hashtag,
+                           lang="en").items(N)
+    # Tweets = api.geo_search(query='Kenya', granularity="country")
+    # print(Tweets.text[0])
     negative = 0.0
     positive = 0.0
     negative_count = 0
@@ -24,21 +26,37 @@ def getdata(input_hashtag):
     tweets_pos = []
     tweets_neg = []
     tweets_nut = []
+    general_location = []
+    time_negative = {}
+    time_neutral = {}
+    time_positive = {}
+    # if len(Tweets) < 1:
+    #     print("no tweets for now")
+    # else:
     # print(Tweets)
     for tweet in Tweets:
-        print(tweet.created_at)
+        # print(tweet.created_at)
+        # print(tweet.user.location)
+        # print("placeid:%s" % tweet)
+        # print(tweet.id_str, tweet.coordinates, tweet.geo, tweet.geocode)
+        # print(tweet.place.country)
+        general_location.append(tweet.user.location)
         blob = TextBlob(tweet.text)
         if blob.sentiment.polarity < 0:
             negative += blob.sentiment.polarity
             negative_count += 1
             tweets_neg.append(tweet.text)
+            time_negative[tweet.created_at] = tweet.text
         elif blob.sentiment.polarity == 0:
             neutral_count += 1
             tweets_nut.append(tweet.text)
+            time_neutral[tweet.created_at] = tweet.text
         else:
             positive += blob.sentiment.polarity
             postive_count += 1
             tweets_pos.append(tweet.text)
+            time_positive[tweet.created_at] = tweet.text
+
     # post = ("Positive ", float(postive_count/N)*100, "%")
 
     data = {
@@ -49,10 +67,16 @@ def getdata(input_hashtag):
         'Negative': negative_count,
         'Nagative_tweets': tweets_neg,
         'Neutral_tweets': tweets_nut,
-        'Postive_tweets': tweets_pos
+        'Postive_tweets': tweets_pos,
+        'general_location': general_location,
+        'time_negative': time_negative,
+        'time_neutral': time_neutral,
+        'time_positive': time_positive
+
     }
     # print(post)
-    print(data)
+    # print(data)
+
     return data
     # return [['Sentiment', 'number of tweets'], ['Positive', postive_count],
     #         ['Neutral', neutral_count], ['Negative', negative_count]]
