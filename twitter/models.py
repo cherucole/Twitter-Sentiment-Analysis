@@ -4,9 +4,9 @@ from django.conf import settings
 # Create your models here.
 
 
-class sentiments(models.Model):
+class Sentiments(models.Model):
     query = models.CharField(
-        required=True, max_length=150, label='Input #hashtag')
+        max_length=150, default='Input #hashtag')
 
     def __str__(self):
         return self.query

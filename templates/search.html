@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div id="input_hastag"
+         class="col s12">
+        <form method="get"
+              action="{% url 'analyse' %} ">
+            <div class="input-field col s4 m3 l2 offset-s2 offset-m2 offset-l2">
+                <label for="{{ input_hastag.q.id_for_label }}">Input Hashtag:</label>
+                {{ input_hastag.q }}
+            </div>
+            <br>
+            <button type="submit"
+                    class="btn btn-link">Anlyse send</button>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Some Line Charts loaded in Ajax!</h1>
+
+
+</div>
+{% endblock %}
