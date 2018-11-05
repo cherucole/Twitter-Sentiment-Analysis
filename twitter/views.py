@@ -6,6 +6,8 @@ from . apicall import getdata
 from chartjs.views.lines import BaseLineChartView
 from . models import *
 import datetime
+from django.contrib.auth.decorators import login_required
+
 
 # Importations for PDF report processing
 from django.views.generic import View
@@ -63,7 +65,7 @@ class Pdf(View):
 #                 [41, 92, 18, 3, 73, 87, 92],
 #                 [87, 21, 94, 3, 90, 13, 65]]
 
-
+@login_required(login_url='/login/')
 def analyse(request):
     user_input = userinput(request.GET or None)
     if request.GET and user_input.is_valid():

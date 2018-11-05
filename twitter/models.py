@@ -60,7 +60,7 @@ class SentimentsTwitterHashtag(models.Model):
     negative_tweets = models.TextField(max_length=100)
     postive_tweets = models.TextField(max_length=100)
     publication_date = models.DateField()
-    # profile_id = models.ForeignKey(Profile)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=True)
 
     def __str__(self):
         return self.topic
