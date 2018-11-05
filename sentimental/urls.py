@@ -15,14 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from . import views
+from . import views as app_views
+from django.contrib.auth import views
 
 
 urlpatterns = [
+    url(r'^oauth/', include('social_django.urls', namespace='social')),  # for social login
     url(r'^admin/', admin.site.urls),
-    url(r'acconts/', include('accounts.urls', namespace='accounts')),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
+
     url(r'accounts/', include('django.contrib.auth.urls')),
-    url(r"^test/$", views.TestPage.as_view(), name="test"),
-    url(r"^thanks/$", views.ThanksPage.as_view(), name="thanks"),
+    url(r"^test/$", app_views.TestPage.as_view(), name="test"),
+    url(r"^thanks/$", app_views.ThanksPage.as_view(), name="thanks"),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^logout/$', views.logout, name='logout'),
     url(r'^', include('twitter.urls')),
 ]
+

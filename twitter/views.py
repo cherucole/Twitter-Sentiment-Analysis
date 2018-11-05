@@ -4,19 +4,42 @@ from django.http import HttpResponse
 from .forms import userinput
 from . apicall import getdata
 from chartjs.views.lines import BaseLineChartView
-from . models import SentimentsTwitterHashtag
+from . models import *
 import datetime
 
+# Importations for PDF report processing
+from django.views.generic import View
+from django.utils import timezone
+from .models import *
+# from .render import Render
+# End of importations for PDF
 
+from .forms import *
+from django.shortcuts import render,redirect,get_list_or_404,get_object_or_404
 # Create your views here.
 
+def index(request):
 
-def home(request):
+    return render(request,'index.html')
+
+def query(request):
     # hall = 'trump'
     # random = getdata(hall)
     # print(random)
     word = "word of the home"
     return render(request, 'home.html', {"word": word})
+
+class Pdf(View):
+
+    def get(self, request):
+        report = Report.objects.all()
+        today = timezone.now()
+        params = {
+            'today': today,
+            'sentiments': report,
+            'request': request
+        }
+        return Render.render('pdf.html', params)
 
 
 # class LineChartJSONView(BaseLineChartView):
@@ -74,3 +97,52 @@ def analyse(request):
         sentiments.save()
         return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})
+
+
+# Authentication views
+def register(request):
+    if request.user.is_authenticated():
+        return redirect('index')
+    else:
+        if request.method == 'POST':
+            form = RegistrationForm(request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                # user.is_active = False
+                user.save()
+                # current_site = get_current_site(request)
+                # to_email = form.cleaned_data.get('email')
+                # activation_email(user, current_site, to_email)
+                # return HttpResponse('Please confirm your email')
+            return redirect('auth_login')
+
+        else:
+            form = RegistrationForm()
+        return render(request, 'registration/signup.html',{'form':form})
+
+def profile(request,username):
+    profile = User.objects.get(username=username)
+    try:
+        profile_details = Profile.get_by_id(profile.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+    sentiments = Reports.get_profile_reports(profile.id)
+    title = f'@{profile.username} Projects'
+
+
+    return render(request, 'profile/profile.html', {'title':title, 'profile':profile, 'sentiments':sentiments, 'profile_details':profile_details})
+
+
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            edit = form.save(commit=False)
+            edit.user = request.user
+            edit.save()
+            return redirect('profile',username=request.user)
+    else:
+        form = EditProfileForm()
+
+    return render(request, 'profile/edit_profile.html', {'form':form})

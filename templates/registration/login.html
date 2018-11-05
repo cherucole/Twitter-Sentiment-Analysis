@@ -1,0 +1,69 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+
+<body>
+    <div class="container" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+        <div class="row">
+            <!-- Empty div -->
+            <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4"></div>
+            <div class="col-xs-10 col-sm-10 col-md-4 col-lg-4">
+                {% if form.errors %}
+                <p> Password or Username is incorrect </p>
+                {% endif %}
+                <div class="panel panel-default">
+
+                    <div class="panel-heading">
+                        <h6 class="text-center">Get sentiments</h6>
+
+
+                        <h3 class="text-center">Login Here</h3>
+
+
+
+                    </div>
+                    <div class="panel-body">
+
+                        <form action="/login/" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form%}
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Login">
+                            </div>
+
+                            <input type="hidden" name="next" value="{{next}}">
+
+                        </form>
+
+                        <h4>Don't have an account? <a href="/signup/">Sign Up</a></h4>
+
+                        <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a><br>
+                        <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- empty div -->
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        background: url("../../../static/img/bg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 650px;
+    }
+
+    h2 {
+        color: black;
+        text-align: center;
+    }
+</style>
+{% endblock %}

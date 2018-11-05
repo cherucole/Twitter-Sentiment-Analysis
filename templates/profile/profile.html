@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ form.media }}
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    {% if profile_details.photo %}
+                    <h3 style="text-align:left; color: white;">My Profile Photo</h3>
+                    <img src="{{profile_details.photo.url}}" alt="photo" width='200' height='200'>
+                    {% else %}
+                    <img src="/static/images/dp.jpg" alt="avatar" width='200' height='200' style="align: center;">
+                    {% endif %}
+
+                </div>
+
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center" id="prof-col">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <h4 style="color: black;">
+                                <span class="username">
+                                    <h5 style="color: green;">Username:</h5> {{ profile.username }}
+                                </span></h4>
+                            <span class="username">
+                                <h5 style="color: green;">Email:</h5> {{ profile.email }}
+                            </span></h4>
+                            <span class="username">
+                                <h5 style="color: green;">Neighborhood:</h5> {{ profile_details.neighborhood }}
+                            </span></h4>
+
+                            <h4>
+                                <h5 style="color: green;">Joined On:</h5> {{ request.user.date_joined }}
+                            </h4>
+                            <h4>
+                                <h5 style="color: green;">Last Login:</h5> {{ request.user.last_login }}
+                            </h4>
+
+                        </li>
+                        {% if profile.username == user.username %}
+
+                        <li class="list-inline-item">
+                            <a data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-2x"></i></a>
+                        </li>
+                        <img src="{{profile.image.url}}" width='500' height='500' alt="">
+                        {% else %}
+
+                        {% endif %}
+
+
+                    </ul>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <span class="font-weight-bold">
+                                <h5 style="color: green;">Your Posts:</h5> You have posted <h4 style="color:green">{{posts|length}}
+                                </h4>
+                            </span> Post Updates
+                        </li>
+                    </ul>
+
+                    {% if profile.username == user.username %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <br><br>
+
+        <div class="row">
+            <h3 style="color: white; text-align: center;">My Updates</h3>
+            <br>
+            {% for post in posts %}
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+
+                <div class="well" width='50' height='50' id="prof-post">
+                    <h5><b>
+                            <h4 style="color: green;">Title</h4>
+                        </b> {{post.name}}</h5>
+
+                    <h5>{{post.pub_date|timesince}} ago</h5>
+
+                    <h5><b>
+                            <h4 style="color: green;">Details</h4>
+                        </b> {{post.description}}</h5>
+
+                    <h5><b>
+                            <h4 style="color: green;">Neighborhood</h4>
+                        </b> {{post.location}}</h5>
+                    <h5><b>
+                            <h4 style="color: green;">Category</h4>
+                        </b> {{post.category}}</h5>
+                </div>
+            </div>
+
+
+
+            {% empty %}
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <h5>You have submitted 0 projects so far. Please submit projects</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item text-center"><a href="#">Edit Profile</a></li>
+                        <li class="list-group-item text-center"><a href="/logout/">Log Out</a></li>
+                        <li class="list-group-item text-center"><a data-dismiss="modal">Cancel</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<style>
+    body {
+        background: url("../../../static/img/bg5.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 20px;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    #prof-col {
+        height: 400px;
+        width: 300px;
+        background-color: #F7F7F7;
+        opacity: 0.7;
+    }
+
+    #prof-post {
+        height: 100%;
+        background-color: #F7F7F7;
+        opacity: 0.7;
+    }
+</style>
+
+
+
+
+
+{% endblock %}

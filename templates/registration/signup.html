@@ -1,0 +1,56 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+    <div class="row signup-page">
+        <!--<div class="col-md-6">-->
+        <!--<img src="/static/images/ig.png" alt="Project Rating">-->
+        <!--</div>-->
+        <div class="col-md-6" id="signup">
+            {% if form.errors %}
+            <p>Some information may be incorrect</p>
+            {% endif %}
+            <div class="signup-fields">
+                <div class="section">
+                    <h2><i>Sentiment Analysis</i></h2>
+                    <div class="form-section">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm" value="Sign up">
+                            </div>
+                            <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                    </div>
+                </div>
+                <div class="section">
+                    <p>Have an account? <a href="/login/" class="btn btn-primary btn-sm">Log In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    body {
+        background: url("../../../static/img/bg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 650px;
+    }
+
+    h2 {
+        color: black;
+        text-align: center;
+    }
+
+    #signup {
+        height: 900px;
+        width: 400px;
+        background-color: #F7F7F7;
+        align-content: center;
+    }
+</style>
+{% endblock %}

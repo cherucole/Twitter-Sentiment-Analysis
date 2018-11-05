@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+
+<body>
+    <h2>Welcome to Neighborhood</h2>
+
+    <div class="row" style='text-align:center;'>
+
+        <div class="col-xs-6 col-sm- col-md-6 col-lg-6">
+            <h1>Welcome to Sentimental Analysis</h1>
+        </div>
+
+        <div class="col-xs-6 col-sm- col-md-6 col-lg-6" style="text-align:left; color:white;">
+            <div class="wells">
+
+                <ul>
+                    <li>
+                        <h5>Register and login</h5>
+                    </li>
+                    <li>
+                        <h5>Click on the Drop-Down menu at the navbar, Go to your profile and choose your neighborhood</h5>
+                    </li>
+                    <li>
+                        <h5>Click on Local Updates to see the updates within your neighborhood as well as Police and
+                            Hospital contacts</h5>
+                    </li>
+                    <li>
+                        <h5>Click on Business Around Me to see the business within your neighborhood and their contacts</h5>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<style>
+    body {
+        background: url("../../../static/img/bg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 650px;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+</style>
+{% endblock %}

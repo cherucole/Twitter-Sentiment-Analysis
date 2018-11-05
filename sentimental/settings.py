@@ -12,6 +12,23 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'homepage'
+
+
+SOCIAL_AUTH_FACEBOOK_KEY = '565645297209009'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = 'ef17014116609700175398a315fbd085'  # App Secret
+
+# SOCIAL_AUTH_GITHUB_KEY = 'f07e3902c77a597d56b9'
+# SOCIAL_AUTH_GITHUB_SECRET = '7c07e59bd4cbd36b50b9b78c9a91816094d24b17'
+
+SOCIAL_AUTH_TWITTER_KEY = 'yuXnFI1SxBNTJXozhKUmKOwbz'
+SOCIAL_AUTH_TWITTER_SECRET = 'MWQtUaquEhOqYPx90PRY5Lt9keGIEyQy4S39E8o2dhEmkouMWU'
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,7 +57,11 @@ INSTALLED_APPS = [
     'accounts',
     'twitter',
     'bootstrap4',
-    'chartjs'
+    'chartjs',
+    # social share. should be added to bottom of list to avoid module not found errors
+    # 'django_social_share',
+    'social_django',  # added for social login
+
 ]
 
 MIDDLEWARE = [
@@ -51,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # added for social login
+
 ]
 
 ROOT_URLCONF = 'sentimental.urls'
@@ -66,10 +89,20 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # added for social login
+                'social_django.context_processors.login_redirect',  # added for social login
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'sentimental.wsgi.application'
 

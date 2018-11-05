@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<body>
+    <div class="container-fluid" style="background-color: #F7F7F7; margin-top: 10px;" id="edit-prof">
+        <div class="row">
+
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <h3 id="acc">Account</h3>
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <div class="jumbotron" style="background-color: #F7F7F7;">
+                    <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <input type="submit" class="btn btn-success" id="btn-update" value="Update">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background: url("../../../static/img/bg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 650px;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    #edit-prof {
+        opacity: 0.5;
+        width: 300px;
+    }
+
+    #acc {
+        color: black;
+        text-align: center;
+    }
+
+    #btn-update {
+        color: black;
+        opacity: 1;
+    }
+</style>
+{% endblock %}
