@@ -12,10 +12,10 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('first_name','last_name', 'username', 'email', 'password1', 'password2')
+        fields = ('username', 'password1', 'password2')
 
 
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user','email']
+        exclude = ['user']

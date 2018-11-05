@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 
 
-
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'homepage'
@@ -166,5 +165,5 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-LOGIN_REDIRECT_URL = "home.html"
-LOGOUT_REDIRECT_URL = "/home.html"
+LOGIN_REDIRECT_URL = "/index"
+LOGOUT_REDIRECT_URL = "/login"

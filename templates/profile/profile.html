@@ -7,15 +7,7 @@
     <div class="container">
         <div class="row">
             <div class="row">
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                    {% if profile_details.photo %}
-                    <h3 style="text-align:left; color: white;">My Profile Photo</h3>
-                    <img src="{{profile_details.photo.url}}" alt="photo" width='200' height='200'>
-                    {% else %}
-                    <img src="/static/images/dp.jpg" alt="avatar" width='200' height='200' style="align: center;">
-                    {% endif %}
 
-                </div>
 
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center" id="prof-col">
                     <ul class="list-inline">
@@ -39,13 +31,12 @@
                             </h4>
 
                         </li>
-                        {% if profile.username == user.username %}
+                        {% if user.username %}
 
                         <li class="list-inline-item">
                             <a data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-2x"></i></a>
                         </li>
                         <img src="{{profile.image.url}}" width='500' height='500' alt="">
-                        {% else %}
 
                         {% endif %}
 
