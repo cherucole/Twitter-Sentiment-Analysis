@@ -79,9 +79,9 @@ def analyse(request):
         positive = data['Positive']
         neutral = data['Neutral']
         negative = data['Negative']
-        negative_tweets = data['Negative_tweets'][0:3]
-        neutral_tweets = data['Neutral_tweets'][0:3]
-        postive_tweets = data['Postive_tweets'][0:3]
+        negative_tweets = data['Negative_tweets'][0:5]
+        neutral_tweets = data['Neutral_tweets'][0:5]
+        postive_tweets = data['Postive_tweets'][0:5]
 
         time_positive = data['time_positive']
 
