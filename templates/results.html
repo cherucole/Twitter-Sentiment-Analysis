@@ -4,121 +4,119 @@
     <div class="results-pie col-md-6">
         <h1>{{topic}}</h1>
         <div class="col-md-6 d-flex justify-content-center">
-        <canvas id="pie-chart"
-                width="250"
-                height="250"></canvas>
-        <script>
-            var ctx = document.getElementById("pie-chart");
-            var pos = JSON.parse('{{positive}}')
-            var neut = JSON.parse('{{neutral}}')
-            var neg = JSON.parse('{{negative}}')
-            console.log(pos)
-            var myChart = new Chart(ctx, {
-            type: 'polarArea',
-                data: {
-                    labels: ["Positive", "Neutral", "Negative"],
-                    datasets: [{
-                        label: 'of 500 sample anayzed tweet',
-                        data: [pos, neut, neg],
-                        backgroundColor: [
-                            'rgba(0, 255, 0, 0.3)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 0, 0, 0.3)',
+            <canvas id="pie-chart" width="250" height="250"></canvas>
+            <script>
+                var ctx = document.getElementById("pie-chart");
+                var pos = JSON.parse('{{positive}}')
+                var neut = JSON.parse('{{neutral}}')
+                var neg = JSON.parse('{{negative}}')
+                console.log(pos)
+                var myChart = new Chart(ctx, {
+                    type: 'polarArea',
+                    data: {
+                        labels: ["Positive", "Neutral", "Negative"],
+                        datasets: [{
+                            label: 'of 500 sample anayzed tweet',
+                            data: [pos, neut, neg],
+                            backgroundColor: [
+                                'rgba(0, 255, 0, 0.3)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 0, 0, 0.3)',
 
-                        ],
-                        borderColor: [
-                            'rgba(0, 255, 0, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 0, 0, 1)',
-                        ],
-                    }]
-                },
-            });
-        </script>
-    </div>
-    <div class="results-bar col-md-6">
-        <canvas id="bar-chart"
-                width="250"
-                height="250"></canvas>
-        <script>
-            var ctx = document.getElementById("bar-chart");
-            var pos = JSON.parse('{{positive}}')
-            var neut = JSON.parse('{{neutral}}')
-            var neg = JSON.parse('{{negative}}')
-            console.log(pos)
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ["Positive", "Neutral", "Negative"],
-                    datasets: [{
-                        label: 'of 500 sample anayzed tweet',
-                        data: [pos, neut, neg],
-                        backgroundColor: [
-                            'rgba(0, 255, 0, 0.3)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 0, 0, 0.3)',
+                            ],
+                            borderColor: [
+                                'rgba(0, 255, 0, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 0, 0, 1)',
+                            ],
+                        }]
+                    },
+                });
+            </script>
+        </div>
+        <div class="results-bar col-md-6">
+            <canvas id="bar-chart" width="250" height="250"></canvas>
+            <script>
+                var ctx = document.getElementById("bar-chart");
+                var pos = JSON.parse('{{positive}}')
+                var neut = JSON.parse('{{neutral}}')
+                var neg = JSON.parse('{{negative}}')
+                console.log(pos)
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Positive", "Neutral", "Negative"],
+                        datasets: [{
+                            label: 'of 500 sample anayzed tweet',
+                            data: [pos, neut, neg],
+                            backgroundColor: [
+                                'rgba(0, 255, 0, 0.3)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 0, 0, 0.3)',
 
-                        ],
-                        borderColor: [
-                            'rgba(0, 255, 0, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 0, 0, 1)',
-                        ],
-                    }]
-                },
-                options: {
-                    legend: { display: false },
-                    title: {
-                        display: true,
-                        text: 'Predicted world population (millions) in 2050'
+                            ],
+                            borderColor: [
+                                'rgba(0, 255, 0, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 0, 0, 1)',
+                            ],
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Bar graph showing tweets sentiment'
+                        }
                     }
-                }
-            });
-        </script>
+                });
+            </script>
+        </div>
     </div>
 </div>
-</div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header">
-                <h2>Negative tweets</h2>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2>Negative tweets</h2>
 
-            </div>
-            {% for tweet in nagative_tweets %}
-            <div class="card-body">
-                {{ tweet }}
-
-            </div>
-
-            {% endfor %}
         </div>
-        <div class="card">
-            <div class="card-header">
-                <h2>postive tweets </h2>
+        {% for tweet in negative_tweets %}
+        <div class="card-body">
+            {{ tweet }}
 
-            </div>
-            {% for tweet in postive_tweets %}
-            <div class="card-body">
-                {{ tweet }}
-
-            </div>
-
-            {% endfor %}
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <h2>Neutral tweets</h2>
-
-            </div>
-            {% for tweet in neutral_tweets %}
-            <div class="card-body">
-                {{ tweet }}
-
-            </div>
-
-            {% endfor %}
         </div>
 
-
+        {% endfor %}
     </div>
-    {% endblock %}
+    <div class="card">
+        <div class="card-header">
+            <h2>postive tweets </h2>
+
+        </div>
+        {% for tweet in postive_tweets %}
+        <div class="card-body">
+            {{ tweet }}
+
+        </div>
+
+        {% endfor %}
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h2>Neutral tweets</h2>
+
+        </div>
+        {% for tweet in neutral_tweets %}
+        <div class="card-body">
+            {{ tweet }}
+
+        </div>
+
+        {% endfor %}
+    </div>
+
+
+</div>
+{% endblock %}

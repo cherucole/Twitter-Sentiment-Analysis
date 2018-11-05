@@ -65,7 +65,7 @@ def getdata(input_hashtag):
         'Positive': postive_count,
         'Neutral': neutral_count,
         'Negative': negative_count,
-        'Nagative_tweets': tweets_neg,
+        'Negative_tweets': tweets_neg,
         'Neutral_tweets': tweets_nut,
         'Postive_tweets': tweets_pos,
         'general_location': general_location,
