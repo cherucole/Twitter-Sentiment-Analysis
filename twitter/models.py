@@ -6,30 +6,6 @@ from django.db.models.signals import post_save
 
 
 # Create your models here.
-class SentimentsTwitterHashtag(models.Model):
-    topic = models.CharField(max_length=128)
-    sample_size = models.CharField(max_length=100)
-    postive_count = models.IntegerField()
-    neutral_count = models.IntegerField()
-    negative_count = models.IntegerField()
-    neutral_tweets = models.TextField(max_length=100)
-    negative_tweets = models.TextField(max_length=100)
-    postive_tweets = models.TextField(max_length=100)
-    publication_date = models.DateField()
-
-    def __str__(self):
-        return self.topic
-
-
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-
-@receiver(post_save, sender=User)
-def save_profile(sender, instance, **kwargs):
-    instance.profile.save()
 
 
 # Create your models here.
@@ -38,6 +14,7 @@ class Profile(models.Model):
     # email = models.CharField(max_length=30, null=True)
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, default=1)
+
     # neighborhood = models.ForeignKey(Neighborhood, default=6)
 
     def __str__(self):
@@ -66,3 +43,35 @@ class Profile(models.Model):
     def filter_by_id(cls, id):
         profile = Profile.objects.filter(user=id).first()
         return profile
+
+    @classmethod
+    def get_profile_reports(cls, id):
+        user_reports = SentimentsTwitterHashtag.objects.all()
+        return user_reports
+
+
+class SentimentsTwitterHashtag(models.Model):
+    topic = models.CharField(max_length=128)
+    sample_size = models.CharField(max_length=100)
+    postive_count = models.IntegerField()
+    neutral_count = models.IntegerField()
+    negative_count = models.IntegerField()
+    neutral_tweets = models.TextField(max_length=100)
+    negative_tweets = models.TextField(max_length=100)
+    postive_tweets = models.TextField(max_length=100)
+    publication_date = models.DateField()
+    profile_id = models.ForeignKey(Profile)
+
+    def __str__(self):
+        return self.topic
+
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()

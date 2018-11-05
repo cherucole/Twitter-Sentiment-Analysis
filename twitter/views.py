@@ -15,12 +15,14 @@ from .models import *
 # End of importations for PDF
 
 from .forms import *
-from django.shortcuts import render,redirect,get_list_or_404,get_object_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 # Create your views here.
+
 
 def index(request):
 
-    return render(request,'index.html')
+    return render(request, 'index.html')
+
 
 def query(request):
     # hall = 'trump'
@@ -29,10 +31,11 @@ def query(request):
     word = "word of the home"
     return render(request, 'home.html', {"word": word})
 
+
 class Pdf(View):
 
     def get(self, request):
-        report = Report.objects.all()
+        report = SentimentsTwitterHashtag.objects.all()
         today = timezone.now()
         params = {
             'today': today,
@@ -81,7 +84,7 @@ def analyse(request):
         listt = time_positive.keys()
         print(min(listt))
         # print(data['Positive'])
-        # print(nagative_tweets)
+        # print(negative_tweets)
         # print(data)
         sentiments = SentimentsTwitterHashtag(topic=topic,
                                               sample_size=sample,
@@ -118,20 +121,19 @@ def register(request):
 
         else:
             form = RegistrationForm()
-        return render(request, 'registration/signup.html',{'form':form})
+        return render(request, 'registration/signup.html', {'form': form})
 
-def profile(request,username):
+
+def profile(request, username):
     profile = User.objects.get(username=username)
     try:
         profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
-    sentiments = Reports.get_profile_reports(profile.id)
+    sentiments = Profile.get_profile_reports(profile.id)
     title = f'@{profile.username} Projects'
 
-
-    return render(request, 'profile/profile.html', {'title':title, 'profile':profile, 'sentiments':sentiments, 'profile_details':profile_details})
-
+    return render(request, 'profile/profile.html', {'title': title, 'profile': profile, 'sentiments': sentiments, 'profile_details': profile_details})
 
 
 def edit_profile(request):
@@ -141,8 +143,8 @@ def edit_profile(request):
             edit = form.save(commit=False)
             edit.user = request.user
             edit.save()
-            return redirect('profile',username=request.user)
+            return redirect('profile', username=request.user)
     else:
         form = EditProfileForm()
 
-    return render(request, 'profile/edit_profile.html', {'form':form})
+    return render(request, 'profile/edit_profile.html', {'form': form})
