@@ -1,4 +1,4 @@
-#!/home/renegade/Documents/Moringa Core/PRO DEV/sentimental/virtual/bin/python
+#!/Users/cherucole/Desktop/Django/DjangoIP/sentimental2/virtual/bin/python
 from django.core import management
 
 if __name__ == "__main__":

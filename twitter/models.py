@@ -3,8 +3,6 @@ from django.db import models
 
 
 # Create your models here.
-
-
 class SentimentsTwitterHashtag(models.Model):
     topic = models.CharField(max_length=128)
     sample_size = models.CharField(max_length=100)

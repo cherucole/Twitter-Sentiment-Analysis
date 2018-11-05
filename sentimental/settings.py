@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'sentimental.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'sentimental',
-        'USER': 'renegade',
-        'PASSWORD': 'sentimental',
+        'NAME': 'sentiments',
+        'USER': 'cherucole',
+        'PASSWORD': 'cherucole',
     }
 }
 
