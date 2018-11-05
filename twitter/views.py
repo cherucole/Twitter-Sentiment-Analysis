@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .forms import userinput
 from . apicall import getdata
 from chartjs.views.lines import BaseLineChartView
+from . models import SentimentsTwitterHashtag
+import datetime
 
 
 # Create your views here.
@@ -42,12 +44,12 @@ def analyse(request):
         input_hastag = user_input.cleaned_data['q']
         # print(input_hastag)
         data = getdata(input_hastag)
-        topic = data['Topic']
+        topic = '#' + data['Topic']
         sample = data['Sample']
         positive = data['Positive']
         neutral = data['Neutral']
         negative = data['Negative']
-        nagative_tweets = data['Nagative_tweets'][0:3]
+        negative_tweets = data['Nagative_tweets'][0:3]
         neutral_tweets = data['Neutral_tweets'][0:3]
         postive_tweets = data['Postive_tweets'][0:3]
 
@@ -58,5 +60,17 @@ def analyse(request):
         # print(data['Positive'])
         # print(nagative_tweets)
         # print(data)
-        return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'nagative_tweets': nagative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        sentiments = SentimentsTwitterHashtag(topic=topic,
+                                              sample_size=sample,
+                                              postive_count=positive,
+                                              neutral_count=neutral,
+                                              negative_count=negative,
+                                              negative_tweets=negative_tweets,
+                                              neutral_tweets=neutral_tweets,
+                                              postive_tweets=postive_tweets,
+                                              publication_date=datetime.datetime.now()
+
+                                              )
+        sentiments.save()
+        return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})

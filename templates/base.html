@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 {% load bootstrap4 %}
 {% load staticfiles %}
-<!DOCTYPE html>
+{% load static %}
 <html>
 
 <head>
@@ -11,12 +12,14 @@
 
     {%if title%}
 
-    <title>{{title}}</title>
+    <title>Sentimental Application</title>
 
     {%endif%}
 
     {% block styles %}
     {% bootstrap_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/base.css' %}">
     {% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 
