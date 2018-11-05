@@ -24,7 +24,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
-
     url(r'accounts/', include('django.contrib.auth.urls')),
     url(r"^test/$", app_views.TestPage.as_view(), name="test"),
     url(r"^thanks/$", app_views.ThanksPage.as_view(), name="thanks"),
