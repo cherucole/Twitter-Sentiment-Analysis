@@ -67,6 +67,8 @@ class Pdf(View):
 
 @login_required(login_url='/login/')
 def analyse(request):
+    current_user = request.user
+
     user_input = userinput(request.GET or None)
     if request.GET and user_input.is_valid():
         input_hastag = user_input.cleaned_data['q']
@@ -96,7 +98,8 @@ def analyse(request):
                                               negative_tweets=negative_tweets,
                                               neutral_tweets=neutral_tweets,
                                               postive_tweets=postive_tweets,
-                                              publication_date=datetime.datetime.now()
+                                              publication_date=datetime.datetime.now(),
+                                              user=current_user
 
                                               )
         sentiments.save()
