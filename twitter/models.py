@@ -65,6 +65,11 @@ class SentimentsTwitterHashtag(models.Model):
     def __str__(self):
         return self.topic
 
+    @classmethod
+    def get_profile_reports(cls, profile):
+        sentiments = SentimentsTwitterHashtag.objects.filter(user__pk=profile)
+        return sentiments
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):

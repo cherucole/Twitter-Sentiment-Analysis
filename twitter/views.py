@@ -132,7 +132,9 @@ def profile(request, username):
         profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
-    sentiments = Profile.get_profile_reports(profile.id)
+    # sentiments = Profile.get_profile_reports(profile.id)
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
+
     title = f'@{profile.username} Projects'
 
     return render(request, 'profile/profile.html', {'title': title, 'profile': profile, 'sentiments': sentiments, 'profile_details': profile_details})

@@ -57,18 +57,18 @@
             </div>
         </div>
         <br><br>
-
+        {{sentiments}}
         <div class="row">
             <h3 style="color: white; text-align: center;">My Updates</h3>
             <br>
-            {% for post in posts %}
+            {% for post in sentiments %}
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
 
                 <div class="well" width='50' height='50' id="prof-post">
                     <h5><b>
                             <h4 style="color: green;">Title</h4>
-                        </b> {{post.name}}</h5>
+                        </b> {{post.user.username}}</h5>
 
                     <h5>{{post.pub_date|timesince}} ago</h5>
 
