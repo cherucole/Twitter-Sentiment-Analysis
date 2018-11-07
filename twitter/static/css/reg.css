@@ -9,6 +9,11 @@
  */
 /* 2D TRANSITIONS */
 /* Grow */
+
+#or {
+    color: dimgrey;
+}
+
 body {
     background-color: rgb(249, 249, 249);
     font-family: 'Rubik', sans-serif;
