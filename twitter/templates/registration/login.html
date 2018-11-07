@@ -12,7 +12,7 @@
     <div class="row">
 
         <!-- Empty div -->
-        <div class="col-md-4">
+        <div class="col-md-5">
 
             <img src="{% static 'images/login.jpg'%}" alt="" style="width:100%">
 
@@ -21,7 +21,7 @@
         <div class="col-md-1">
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <br>
 
 
@@ -45,7 +45,8 @@
                                 {% bootstrap_form form%}
 
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Login" style="width:100%; padding-left:30px;">
+                                    <input type="submit" class="btn btn-primary btn-sm hvr-bounce-in" value="Login"
+                                        style="width:100%; padding-left:30px;">
                                 </div>
 
                                 <input type="hidden" name="next" value="{{next}}">
