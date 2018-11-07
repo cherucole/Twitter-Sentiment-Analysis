@@ -9,12 +9,17 @@
  */
 /* 2D TRANSITIONS */
 /* Grow */
-img {
+#image1 {
     box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #or {
     color: dimgrey;
+}
+
+#card1 {
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 body {
