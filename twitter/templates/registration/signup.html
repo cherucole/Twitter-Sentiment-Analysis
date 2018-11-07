@@ -56,16 +56,13 @@
                         <ul class="list-group list-group-flush" style="width:90%; padding-left:30px;">
                             <p style="padding-top:0.6em;" id="or">
                                 ---------------------------- OR --------------------------</p>
-                            <form action="/accounts/login/" method="post">
+                            <form method="POST">
                                 {% csrf_token %}
-                                {% bootstrap_form form%}
-
+                                {% bootstrap_form form %}
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-primary btn-sm" value="Login" style="width:100%; padding-left:30px;">
-                                </div>
-
+                                        <input type="submit" class="btn btn-primary btn-sm" value="Sign Up" style="width:100%; padding-left:30px;">
+                                    </div>
                                 <input type="hidden" name="next" value="{{next}}">
-
                             </form>
                             </li>
 
