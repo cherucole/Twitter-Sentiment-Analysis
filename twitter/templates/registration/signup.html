@@ -1,56 +1,100 @@
-{% extends 'registration/base.html' %}
+{%extends "registration/base.html"%}
 {% load bootstrap4 %}
-
 {% block content %}
+{% load static%}
+
 <div class="container">
-    <div class="row signup-page">
-        <!--<div class="col-md-6">-->
-        <!--<img src="/static/images/ig.png" alt="Project Rating">-->
-        <!--</div>-->
-        <div class="col-md-6" id="signup">
-            {% if form.errors %}
-            <p>Some information may be incorrect</p>
-            {% endif %}
-            <div class="signup-fields">
-                <div class="section">
-                    <h2><i>Sentiment Analysis</i></h2>
-                    <div class="form-section">
-                        <form method="POST">
-                            {% csrf_token %}
-                            {% bootstrap_form form %}
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-primary btn-sm" value="Sign up">
-                            </div>
-                            <input type="hidden" name="next" value="{{next}}">
-                        </form>
-                    </div>
-                </div>
-                <div class="section">
-                    <p>Have an account? <a href="/login/" class="btn btn-primary btn-sm">Log In</a></p>
-                </div>
-            </div>
+    <br>
+    <br>
+
+
+    <br>
+    <div class="row">
+
+        <!-- Empty div -->
+        <div class="col-md-5">
+
+            <img src="{% static 'images/login.jpg'%}" alt="" style="width:100%" id="image1">
+
+
         </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-6">
+            <br>
+
+
+            <br>
+            {% if form.errors %}
+            <p> Password or Username is incorrect </p>
+            {% endif %}
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <div class="card" style="width:100%;" id="card1">
+                        <h1 style="padding-bottom:0.2em; padding-top: 0.5em;" id="login" class="text-center">Register
+                            to
+                            Brand365</h1>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a class="hvr-float" href="{% url 'social:begin' 'facebook' %}"><img src="{% static 'images/facebook.png' %}"
+                                        style="height:65px;width:90%;padding-left: 1.1em;"></a>
+                            </div>
+                            <div class="col-md-6">
+
+                                <a class="hvr-float" href="{% url 'social:begin' 'twitter' %}"><img src="
+                                            {% static 'images/twitter.png' %}"
+                                        style="height:41px;width:100%;margin-top: 12px;padding-right:3.1em;"></a>
+
+                            </div>
+
+                        </div>
+
+
+                        <ul class="list-group list-group-flush" style="width:90%; padding-left:30px;">
+                            <p style="padding-top:0.6em;" id="or">
+                                ---------------------------- OR --------------------------</p>
+                            <form action="/accounts/login/" method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form%}
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Login" style="width:100%; padding-left:30px;">
+                                </div>
+
+                                <input type="hidden" name="next" value="{{next}}">
+
+                            </form>
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <br>
+                    <div class="card" style="width:100%;" id="card1">
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> Already have an account? <a href="/login " class="forgot ">Login
+                                </a>
+                            </li>
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- empty div -->
+        <div class="col-md-4"></div>
     </div>
 </div>
-<style>
-    body {
-        background: url("../../../static/img/bg1.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 650px;
-    }
 
-    h2 {
-        color: black;
-        text-align: center;
-    }
-
-    #signup {
-        height: 900px;
-        width: 400px;
-        background-color: #F7F7F7;
-        align-content: center;
-    }
-</style>
 {% endblock %}
