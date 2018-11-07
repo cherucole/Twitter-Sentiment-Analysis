@@ -1,0 +1,83 @@
+{%extends "registration/base.html"%}
+{% load bootstrap4 %}
+{% block content %}
+{% load static%}
+
+<div class="container">
+    <br>
+    <br>
+
+
+    <br>
+    <div class="row">
+
+        <!-- Empty div -->
+        <div class="col-md-4">
+
+            <img src="{% static 'images/login.jpg'%}" alt="" style="width:100%">
+
+
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-4">
+            <br>
+
+
+            <br>
+            {% if form.errors %}
+            <p> Password or Username is incorrect </p>
+            {% endif %}
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+
+
+
+
+                    <div class="card" style="width:100%;">
+                        <h1 id="login" class="text-center">Instagram</h1>
+
+                        <ul class="list-group list-group-flush" style="width:90%; padding-left:30px;">
+                            <form action="/accounts/login/" method="post">
+                                {% csrf_token %}
+                                {% bootstrap_form form%}
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary btn-sm" value="Login" style="width:100%; padding-left:30px;">
+                                </div>
+
+                                <input type="hidden" name="next" value="{{next}}">
+
+                            </form>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <br>
+                    <div class="card" style="width:100%;">
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"> Don't have an account? <a href="/accounts/register " class="forgot ">Sign
+                                    up </a>
+                            </li>
+                        </ul>
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- empty div -->
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+{% endblock %}
