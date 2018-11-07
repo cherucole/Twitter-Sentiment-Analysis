@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'css/reg.css' %}">
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="/"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,31 +12,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout">Logout</a>
-            </li>
+
+
         </ul>
 
     </div>
-    <span style="padding-right:2em;width:5em;"><a href="/login"><button class="btn btn-outline hvr-float" type="submit">Login</button></a></span><a
-        href="/register"><button class="btn btn-outline-primary hvr-float" type="submit">Get
+
+    <span style="padding-right:12em;"><a href="/login"><button style="width:8rem;" class="btn btn-outline hvr-float"
+                type="submit">Login</button></a></span><a href="/register"><button style="margin-left:2rem;width:11rem;"
+            class="btn btn-outline-primary hvr-float" type="submit">Get
             Started</button></a>
 </nav>

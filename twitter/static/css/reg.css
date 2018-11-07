@@ -9,6 +9,11 @@
  */
 /* 2D TRANSITIONS */
 /* Grow */
+body {
+    background-color: rgb(249, 249, 249);
+    font-family: 'Rubik', sans-serif;
+}
+
 .btn-outline,
 .btn-outline:hover {
     border-color: currentcolor;
