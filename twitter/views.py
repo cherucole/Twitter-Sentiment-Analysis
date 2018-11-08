@@ -7,6 +7,7 @@ from chartjs.views.lines import BaseLineChartView
 from . models import *
 from .utils import render_to_pdf  # created in step 4
 from django.template.loader import get_template
+import csv
 
 
 import datetime
@@ -174,3 +175,26 @@ def get_pdf(request, username, *args, **kwargs):
         response['Content-Disposition'] = content
         return response
     return HttpResponse("Not found")
+
+def export_users_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="reports.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(['Topic', 'Sample size', 'Postive count', 'Neutral count', 'Negative count', 'Neutral tweets', 'Negative tweets', 'Postive tweets'])
+
+    reports = SentimentsTwitterHashtag.objects.all().values_list('topic', 'sample_size', 'postive_count', 'neutral_count', 'negative_count', 'neutral_tweets', 'negative_tweets', 'postive_tweets')
+    for report in reports:
+        writer.writerow(report)
+
+    return response
+
+
+    # topic = models.CharField(max_length=128)
+    # sample_size = models.CharField(max_length=100)
+    # postive_count = models.IntegerField()
+    # neutral_count = models.IntegerField()
+    # negative_count = models.IntegerField()
+    # neutral_tweets = models.TextField(max_length=100)
+    # negative_tweets = models.TextField(max_length=100)
+    # postive_tweets = models.TextField(max_length=100)

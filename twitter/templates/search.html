@@ -10,7 +10,8 @@
             <br>
             <button type="submit" class="btn btn-link">Anlyse send</button>
         </form>
-        <a href="{% url 'reports' username=user.username %}">Download Reports</a>
+        <a href="{% url 'reports' username=user.username %}">Download My Reports</a>
+        <a href="{% url 'export_csv' %}">Export Excel Reports</a>
 
     </div>
 </div>
