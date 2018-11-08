@@ -35,6 +35,13 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 
+def privacy(request):
+
+    return render(request, 'privacy.html')
+
+
+
+
 def query(request):
     # hall = 'trump'
     # random = getdata(hall)

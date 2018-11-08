@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^pdf/(?P<username>\w+)', views.get_pdf, name='reports'),
     url(r'^pdf/', views.get_pdf, name='get_pdf'),
     url(r'^csv/$', views.export_users_csv, name='export_csv'),
+    url(r'^privacy/$', views.privacy, name='privacy'),
 ]

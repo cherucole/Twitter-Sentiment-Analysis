@@ -4,141 +4,369 @@
 {{ form.media }}
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="row">
 
+    <div class="wrapper">
 
-                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-center" id="prof-col">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <h4 style="color: black;">
-                                <span class="username">
-                                    <h5 style="color: green;">Username:</h5> {{ profile.username }}
-                                </span></h4>
-                            <span class="username">
-                                <h5 style="color: green;">Email:</h5> {{ profile.email }}
-                            </span></h4>
-                            <span class="username">
-                                <h5 style="color: green;">Neighborhood:</h5> {{ profile_details.neighborhood }}
-                            </span></h4>
+        <div class="profile-card js-profile-card">
+            <div class="profile-card__img">
+                <img src="../../static/images/profile.png" alt="">
+            </div>
 
-                            <h4>
-                                <h5 style="color: green;">Joined On:</h5> {{ request.user.date_joined }}
-                            </h4>
-                            <h4>
-                                <h5 style="color: green;">Last Login:</h5> {{ request.user.last_login }}
-                            </h4>
+            <div class="profile-card__cnt js-profile-cnt">
+                <div class="profile-card__name">Name:{{ profile.username }}</div>
 
-                        </li>
-                        {% if user.username %}
+                <div class="profile-card-inf">
+                    <div class="profile-card-inf__item">
+                        <div class="profile-card-inf__txt">Joined On</div>
+                        <div class="profile-card-inf__title">{{ request.user.date_joined }}</div>
+                    </div>
 
-                        <li class="list-inline-item">
-                            <a data-toggle="modal" data-target="#settings"><i class="fa fa-cog fa-2x"></i></a>
-                        </li>
-                        <img src="{{profile.image.url}}" width='500' height='500' alt="">
-
-                        {% endif %}
-
-
-                    </ul>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <span class="font-weight-bold">
-                                <h5 style="color: green;">Your Posts:</h5> You have posted <h4 style="color:green">{{posts|length}}
-                                </h4>
-                            </span> Post Updates
-                        </li>
-                    </ul>
-
-                    {% if profile.username == user.username %}
-                    {% endif %}
+                    <div class="profile-card-inf__item">
+                        <div class="profile-card-inf__txt">Last Login</div>
+                        <div class="profile-card-inf__title">{{ request.user.last_login }}</div>
+                    </div>
                 </div>
+
             </div>
+
         </div>
-        <br><br>
-        {{sentiments}}
-        <div class="row">
-            <h3 style="color: white; text-align: center;">My Updates</h3>
-            <br>
-            {% for post in sentiments %}
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
-
-                <div class="well" width='50' height='50' id="prof-post">
-                    <h5><b>
-                            <h4 style="color: green;">Title</h4>
-                        </b> {{post.user.username}}</h5>
-
-                    <h5>{{post.pub_date|timesince}} ago</h5>
-
-                    <h5><b>
-                            <h4 style="color: green;">Details</h4>
-                        </b> {{post.topic}}</h5>
-
-                    <h5><b>
-                            <h4 style="color: green;">neutral_tweets</h4>
-                        </b> {{post.neutral_tweets}}</h5>
-                    <h5><b>
-                            <h4 style="color: green;">Category</h4>
-                        </b> {{post.category}}</h5>
-                </div>
-            </div>
-
-
-
-            {% empty %}
-            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                <h5>You have submitted 0 projects so far. Please submit projects</h5>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <ul class="list-group">
-                        <li class="list-group-item text-center"><a href="#">Edit Profile</a></li>
-                        <li class="list-group-item text-center"><a href="/logout/">Log Out</a></li>
-                        <li class="list-group-item text-center"><a data-dismiss="modal">Cancel</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 
 <style>
+    @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700&subset=latin-ext");
+
+    html {
+        position: relative;
+        overflow-x: hidden !important;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
     body {
-        background: url("../../../static/img/bg5.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 20px;
+        font-family: 'Quicksand', sans-serif;
+        color: #324e63;
     }
 
-    h2 {
-        color: white;
-        text-align: center;
+    a,
+    a:hover {
+        text-decoration: none;
     }
 
-    #prof-col {
-        height: 400px;
-        width: 300px;
-        background-color: #F7F7F7;
-        opacity: 0.7;
+    .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
     }
 
-    #prof-post {
+    .wrapper {
+        width: 100%;
+        width: 100%;
+        height: auto;
+        min-height: 100vh;
+        padding: 50px 20px;
+        padding-top: 100px;
+        display: flex;
+        background-color: #D8F5F9
+    }
+
+    @media screen and (max-width: 768px) {
+        .wrapper {
+            height: auto;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+    }
+
+    .profile-card {
+        width: 100%;
+        min-height: 460px;
+        margin: auto;
+        box-shadow: 0px 8px 60px -10px rgba(13, 28, 39, 0.6);
+        background: #fff;
+        border-radius: 12px;
+        max-width: 700px;
+        position: relative;
+    }
+
+    .profile-card.active .profile-card__cnt {
+        filter: blur(6px);
+    }
+
+    .profile-card.active .profile-card-message,
+    .profile-card.active .profile-card__overlay {
+        opacity: 1;
+        pointer-events: auto;
+        transition-delay: .1s;
+    }
+
+    .profile-card.active .profile-card-form {
+        transform: none;
+        transition-delay: .1s;
+    }
+
+    .profile-card__img {
+        width: 150px;
+        height: 150px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+        z-index: 4;
+        box-shadow: 0px 5px 50px 0px #6c44fc, 0px 0px 0px 7px rgba(107, 74, 255, 0.5);
+    }
+
+    @media screen and (max-width: 576px) {
+        .profile-card__img {
+            width: 120px;
+            height: 120px;
+        }
+    }
+
+    .profile-card__img img {
+        display: block;
+        width: 100%;
         height: 100%;
-        background-color: #F7F7F7;
-        opacity: 0.7;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    .profile-card__cnt {
+        margin-top: -35px;
+        text-align: center;
+        padding: 0 20px;
+        padding-bottom: 40px;
+        transition: all .3s;
+    }
+
+    .profile-card__name {
+        font-weight: 700;
+        font-size: 24px;
+        color: #6944ff;
+        margin-bottom: 15px;
+    }
+
+    .profile-card__txt {
+        font-size: 18px;
+        font-weight: 500;
+        color: #324e63;
+        margin-bottom: 15px;
+    }
+
+    .profile-card__txt strong {
+        font-weight: 700;
+    }
+
+    .profile-card-loc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .profile-card-loc__icon {
+        display: inline-flex;
+        font-size: 27px;
+        margin-right: 10px;
+    }
+
+    .profile-card-inf {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin-top: 35px;
+    }
+
+    .profile-card-inf__item {
+        padding: 10px 35px;
+        min-width: 150px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .profile-card-inf__item {
+            padding: 10px 20px;
+            min-width: 120px;
+        }
+    }
+
+    .profile-card-inf__title {
+        font-weight: 700;
+        font-size: 27px;
+        color: #324e63;
+    }
+
+    .profile-card-inf__txt {
+        font-weight: 500;
+        margin-top: 7px;
+    }
+
+    .profile-card-social {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .profile-card-social__item {
+        display: inline-flex;
+        width: 55px;
+        height: 55px;
+        margin: 15px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        background: #405de6;
+        box-shadow: 0px 7px 30px rgba(43, 98, 169, 0.5);
+        position: relative;
+        font-size: 21px;
+        flex-shrink: 0;
+        transition: all .3s;
+    }
+
+    @media screen and (max-width: 768px) {
+        .profile-card-social__item {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .profile-card-social__item:hover {
+            transform: scale(1.2);
+        }
+    }
+
+    .profile-card-ctr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+    }
+
+    @media screen and (max-width: 576px) {
+        .profile-card-ctr {
+            flex-wrap: wrap;
+        }
+    }
+
+    .profile-card-message {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-top: 130px;
+        padding-bottom: 100px;
+        opacity: 0;
+        pointer-events: none;
+        transition: all .3s;
+    }
+
+    .profile-card-form {
+        box-shadow: 0 4px 30px rgba(15, 22, 56, 0.35);
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        height: 100%;
+        background: #fff;
+        border-radius: 10px;
+        padding: 35px;
+        transform: scale(0.8);
+        position: relative;
+        z-index: 3;
+        transition: all .3s;
+    }
+
+    @media screen and (max-width: 768px) {
+        .profile-card-form {
+            max-width: 90%;
+            height: auto;
+        }
+    }
+
+    @media screen and (max-width: 576px) {
+        .profile-card-form {
+            padding: 20px;
+        }
+    }
+
+    .profile-card-form__bottom {
+        justify-content: space-between;
+        display: flex;
+    }
+
+    @media screen and (max-width: 576px) {
+        .profile-card-form__bottom {
+            flex-wrap: wrap;
+        }
+    }
+
+    .profile-card textarea {
+        width: 100%;
+        resize: none;
+        height: 210px;
+        margin-bottom: 20px;
+        border: 2px solid #dcdcdc;
+        border-radius: 10px;
+        padding: 15px 20px;
+        color: #324e63;
+        font-weight: 500;
+        font-family: 'Quicksand', sans-serif;
+        outline: none;
+        transition: all .3s;
+    }
+
+    .profile-card textarea:focus {
+        outline: none;
+        border-color: #8a979e;
+    }
+
+    .profile-card__overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        opacity: 0;
+        background: rgba(22, 33, 72, 0.35);
+        border-radius: 12px;
+        transition: all .3s;
     }
 </style>
 
+<script>
+    var messageBox = document.querySelector(".js-message");
+    var btn = document.querySelector(".js-message-btn");
+    var card = document.querySelector(".js-profile-card");
+    var closeBtn = document.querySelectorAll(".js-message-close");
 
+    btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        card.classList.add("active");
+    });
+
+    closeBtn.forEach(function (element, index) {
+        console.log(element);
+        element.addEventListener("click", function (e) {
+            e.preventDefault();
+            card.classList.remove("active");
+        });
+    });
+</script>
 
 
 
