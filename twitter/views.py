@@ -155,7 +155,7 @@ def get_pdf(request, username, *args, **kwargs):
     profile = User.objects.get(username=username)
     sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
 
-    inv = 'test invoice id to render isht'
+    inv = 'test invoice id to render content'
     context = {
         "invoice_id": inv,
         "sentiments": sentiments,
