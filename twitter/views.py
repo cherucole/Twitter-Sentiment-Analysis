@@ -150,8 +150,10 @@ def edit_profile(request):
 
 def get_pdf(request, *args, **kwargs):
     template = get_template('pdf/reports.html')
+
+    inv = 'test invoice id to render isht'
     context = {
-        "invoice_id": 123,
+        "invoice_id": inv,
         "customer_name": "John Cooper",
         "amount": 1399.99,
         "today": "Today",
