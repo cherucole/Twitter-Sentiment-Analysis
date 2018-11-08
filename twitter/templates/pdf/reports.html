@@ -52,10 +52,33 @@
         </div>
         <div>
             <div class='details'>
-                Bill to: <br />
-                Amount: <br />
-                Date:
-                <hr class='hrItem' />
+                {% for post in sentiments %}
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+
+                    <div class="well" width='50' height='50' id="prof-post">
+                        <h5><b>
+                                <h4 style="color: green;">Title</h4>
+
+
+                                <h5><b>
+                                        <h4 style="color: green;">Details</h4>
+                                    </b> {{post.topic}}</h5>
+
+                                <h5><b>
+                                        <h4 style="color: green;">neutral_tweets</h4>
+                                        <h5><b>
+                                                <h4 style="color: green;">Category</h4>
+                    </div>
+                </div>
+
+
+
+                {% empty %}
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <h5>You have submitted 0 projects so far. Please submit projects</h5>
+                </div>
+                {% endfor %}
             </div>
         </div>
 </body>

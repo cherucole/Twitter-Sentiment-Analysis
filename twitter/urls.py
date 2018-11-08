@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^query/$', views.analyse, name='query'),
     url(r'^signup/', views.register, name='signup'),
     url(r'^user/(?P<username>\w+)', views.profile, name='profile'),
+    url(r'^pdf/(?P<username>\w+)', views.get_pdf, name='reports'),
     url(r'^pdf/', views.get_pdf, name='get_pdf'),
 ]

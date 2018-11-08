@@ -148,13 +148,17 @@ def edit_profile(request):
     return render(request, 'profile/edit_profile.html', {'form': form})
 
 
-def get_pdf(request, *args, **kwargs):
+@login_required(login_url='/login/')
+def get_pdf(request, username, *args, **kwargs):
     template = get_template('pdf/reports.html')
+    profile = User.objects.get(username=username)
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
 
     inv = 'test invoice id to render isht'
     context = {
         "invoice_id": inv,
-        "customer_name": "John Cooper",
+        "sentiments": sentiments,
+        'profile': profile,
         "amount": 1399.99,
         "today": "Today",
     }
