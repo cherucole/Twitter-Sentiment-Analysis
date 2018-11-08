@@ -57,7 +57,6 @@ def analyse(request):
     user_input = userinput(request.GET or None)
     if request.GET and user_input.is_valid():
         input_hastag = user_input.cleaned_data['q']
-        # print(input_hastag)
         data = getdata(input_hastag)
         topic = '#' + data['Topic']
         sample = data['Sample']

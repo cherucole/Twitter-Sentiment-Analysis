@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="row">
+    <br>
+    <br>
     <div id="input_hastag" class="col s12">
         <form method="get" action="{% url 'analyse' %} ">
+            <br>
+            <br><br>
+            <br>
             <div class="input-field col s4 m3 l2 offset-s2 offset-m2 offset-l2">
+                123
                 <label for="{{ input_hastag.q.id_for_label }}">Input Hashtag:</label>
                 {{ input_hastag.q }}
             </div>
             <br>
             <button type="submit" class="btn btn-link">Anlyse send</button>
         </form>
-        <a href="{% url 'reports' username=user.username %}">Download My Reports</a>
-        <a href="{% url 'export_csv' %}">Export Excel Reports</a>
+        1 <a href="{% url 'reports' username=user.username %}">Download My Reports</a>
+        2<a href="{% url 'export_csv' %}">Export Excel Reports</a>
 
     </div>
 </div>

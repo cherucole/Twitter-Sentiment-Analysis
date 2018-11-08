@@ -1,7 +1,9 @@
 <header id="page-header"><a id="hamburger" href="#sidebar-nav" target="_self"><span class="line"></span><span class="line"></span><span
       class="line"></span></a>
-  <form onsubmit="submitFn(this, event);" style="background:#ffffff">
-    <div class="search-wrapper">
+      <form method="get" action="{% url 'analyse' %} ">
+          <label for="{{ input_hastag.q.id_for_label }}">Input Hashtag:</label>
+          {{ input_hastag.q }}
+          <!-- <div class="search-wrapper">
       <div class="input-holder">
         <input type="text" class="search-input" placeholder="Type to search" style="background:#ffffff;color: #000000" />
         <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
@@ -10,7 +12,7 @@
       <div class="result-container">
 
       </div>
-    </div>
+    </div> -->
   </form>
 </header>
 <nav id="sidebar-nav">
