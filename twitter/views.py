@@ -5,6 +5,10 @@ from .forms import userinput
 from . apicall import getdata
 from chartjs.views.lines import BaseLineChartView
 from . models import *
+from .utils import render_to_pdf  # created in step 4
+from django.template.loader import get_template
+
+
 import datetime
 from django.contrib.auth.decorators import login_required
 
@@ -32,19 +36,6 @@ def query(request):
     # print(random)
     word = "word of the home"
     return render(request, 'home.html', {"word": word})
-
-
-class Pdf(View):
-
-    def get(self, request):
-        report = SentimentsTwitterHashtag.objects.all()
-        today = timezone.now()
-        params = {
-            'today': today,
-            'sentiments': report,
-            'request': request
-        }
-        return Render.render('pdf.html', params)
 
 
 # class LineChartJSONView(BaseLineChartView):
@@ -155,3 +146,25 @@ def edit_profile(request):
         form = EditProfileForm()
 
     return render(request, 'profile/edit_profile.html', {'form': form})
+
+
+def get_pdf(request, *args, **kwargs):
+    template = get_template('pdf/reports.html')
+    context = {
+        "invoice_id": 123,
+        "customer_name": "John Cooper",
+        "amount": 1399.99,
+        "today": "Today",
+    }
+    html = template.render(context)
+    pdf = render_to_pdf('pdf/reports.html', context)
+    if pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        filename = "Invoice_%s.pdf" % ("12341231")
+        content = "inline; filename='%s'" % (filename)
+        download = request.GET.get("download")
+        if download:
+            content = "attachment; filename='%s'" % (filename)
+        response['Content-Disposition'] = content
+        return response
+    return HttpResponse("Not found")
