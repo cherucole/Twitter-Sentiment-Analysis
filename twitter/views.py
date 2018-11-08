@@ -25,10 +25,14 @@ from .forms import *
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 # Create your views here.
 
-
 def index(request):
 
     return render(request, 'index.html')
+    
+@login_required(login_url='/login/')
+def dashboard(request):
+
+    return render(request, 'dashboard.html')
 
 
 def query(request):
@@ -38,24 +42,6 @@ def query(request):
     word = "word of the home"
     return render(request, 'home.html', {"word": word})
 
-
-# class LineChartJSONView(BaseLineChartView):
-#     template_name = 'home.html'
-
-#     def get_labels(self):
-#         """Return 7 labels for the x-axis."""
-#         return ["January", "February", "March", "April", "May", "June", "July"]
-
-#     def get_providers(self):
-#         """Return names of datasets."""
-#         return ["Central", "Eastside", "Westside"]
-
-#     def get_data(self):
-#         """Return 3 datasets to plot."""
-
-#         return [[75, 44, 92, 11, 44, 95, 35],
-#                 [41, 92, 18, 3, 73, 87, 92],
-#                 [87, 21, 94, 3, 90, 13, 65]]
 
 @login_required(login_url='/login/')
 def analyse(request):
@@ -92,10 +78,9 @@ def analyse(request):
                                               postive_tweets=postive_tweets,
                                               publication_date=datetime.datetime.now(),
                                               user=current_user
-
                                               )
         sentiments.save()
-        return render(request, "results.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})
 
 
@@ -108,17 +93,25 @@ def register(request):
             form = RegistrationForm(request.POST)
             if form.is_valid():
                 user = form.save(commit=False)
-                # user.is_active = False
                 user.save()
-                # current_site = get_current_site(request)
-                # to_email = form.cleaned_data.get('email')
-                # activation_email(user, current_site, to_email)
-                # return HttpResponse('Please confirm your email')
+
             return redirect('auth_login')
 
         else:
             form = RegistrationForm()
         return render(request, 'registration/signup.html', {'form': form})
+
+def profilehistory(request, username):
+    profile = User.objects.get(username=username)
+    try:
+        profile_details = Profile.get_by_id(profile.id)
+    except:
+        profile_details = Profile.filter_by_id(profile.id)
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
+
+    title = f'@{profile.username} Projects'
+
+    return render(request, 'history.html', {'title': title, 'profile': profile, 'sentiments': sentiments, 'profile_details': profile_details})
 
 
 def profile(request, username):
@@ -127,7 +120,6 @@ def profile(request, username):
         profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
-    # sentiments = Profile.get_profile_reports(profile.id)
     sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
 
     title = f'@{profile.username} Projects'
@@ -147,7 +139,6 @@ def edit_profile(request):
         form = EditProfileForm()
 
     return render(request, 'profile/edit_profile.html', {'form': form})
-
 
 @login_required(login_url='/login/')
 def get_pdf(request, username, *args, **kwargs):
@@ -188,13 +179,3 @@ def export_users_csv(request):
         writer.writerow(report)
 
     return response
-
-
-    # topic = models.CharField(max_length=128)
-    # sample_size = models.CharField(max_length=100)
-    # postive_count = models.IntegerField()
-    # neutral_count = models.IntegerField()
-    # negative_count = models.IntegerField()
-    # neutral_tweets = models.TextField(max_length=100)
-    # negative_tweets = models.TextField(max_length=100)
-    # postive_tweets = models.TextField(max_length=100)

@@ -1,114 +1,593 @@
-{% comment %} <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="#" class="navbar-brand">Brand</a>
-    </div>
-    <!-- Collection of nav links and other content for toggling -->
-
-    <div id="navbarCollapse" class="collapse navbar-collapse">
-      {% if user.is_authenticated %}
-
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="#">Profile</a></li>
-        <li><a href="#">Messages</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Logout</a></li>
-      </ul>
-      {% else %}
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="">Sign UP</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="">Login</a></li>
-      </ul>
-      {% endif %}
-
-    </div>
-
-  </div>
-</nav> {% endcomment %}
-{% comment %} <nav role="navigation" class="navbar navbar-default">
-  <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="navbar-header">
-    <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a href="#" class="navbar-brand">Sample Nav Bar & Login demo</a>
-  </div>
-  <!-- Collection of nav links, forms, and other content for toggling -->
-  <div id="navbarCollapse" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Account Settings</a></li>
-      <li class="dropdown">
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Messages <b class="caret"></b></a>
-        <ul role="menu" class="dropdown-menu">
-          <li><a href="#">Inbox</a></li>
-          <li><a href="#">Drafts</a></li>
-          <li><a href="#">Sent Items</a></li>
-          <li class="divider"></li>
-          <li><a href="#">Trash</a></li>
-        </ul>
-      </li>
-    </ul>
-    <form role="search" class="navbar-form navbar-left">
-      <div class="form-group">
-        <input type="text" placeholder="Search" class="form-control">
+<header id="page-header"><a id="hamburger" href="#sidebar-nav" target="_self"><span class="line"></span><span class="line"></span><span
+      class="line"></span></a>
+  <form onsubmit="submitFn(this, event);" style="background:#ffffff">
+    <div class="search-wrapper">
+      <div class="input-holder">
+        <input type="text" class="search-input" placeholder="Type to search" style="background:#ffffff;color: #000000" />
+        <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
       </div>
-    </form>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#" onclick="document.getElementById('id01').style.display='block'" id="id01" width=250px>Login</a></li>
+      <span class="close" onclick="searchToggle(this, event);"></span>
+      <div class="result-container">
+
+      </div>
+    </div>
+  </form>
+</header>
+<nav id="sidebar-nav">
+  <header id="sidebar-header"><img src="../../static/images/profile.png" alt="">
+    <div id="profile-info">
+      <h3 id="profile-name" style="color:#ffffff">{{ request.user.username }}</h3>
+    </div>
+    <ul id="sidebar-nav-list">
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="/"><i class="material-icons"><img src="../static/images/home.png"
+              alt=""></i>Home</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="/dashboard"><i class="material-icons"><img src="../static/images/dash.png"
+              alt=""></i>Dashboard</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="/user/{{user.username}}"><i class="material-icons"><img
+              src="../static/images/user.png" alt=""></i>My Profile</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="/history/{{user.username}}"><i class="material-icons"><img
+              src="../static/images/search.png" alt=""></i>Search history</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="{% url 'reports' username=user.username %}"><i class="material-icons"><img
+              src="../static/images/pdf.png" alt=""></i>PDF Report</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="{% url 'export_csv' %}"><i class="material-icons"><img
+              src="../static/images/external.png" alt=""></i>Excel Export</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="#"><i class="material-icons"><img src="../static/images/scales.png"
+              alt=""></i>Comparison</a></li>
+      <li class="sidebar-nav-item" id="nav-item-home"><a href="/logout"><i class="material-icons"><img src="../static/images/settings.png"
+              alt=""></i>Log out</a></li>
     </ul>
-  </div>
-</nav> {% endcomment %}
+  </header>
+</nav><a id="nav-screen-overlay" href="#" target="_self"></a>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<style>
+  html,
+  body {
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+  }
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Company</a>
-          <a class="dropdown-item" href="#">Contact us</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Privacy policy</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+  ::-moz-selection {
+    background: transparent;
+  }
 
-</nav>
+  ::selection {
+    background: transparent;
+  }
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
+  #background {
+    position: fixed;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/hot-air-balloons.jpg");
+    background-size: cover;
+    background-position: center center;
+    opacity: 0.2;
+  }
+
+  #page-header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100vw;
+    background-color: #0a94ab;
+    box-shadow: 0 -3px 8px 5px #3f3f3f;
+  }
+
+  #page-header #hamburger {
+    position: relative;
+    display: block;
+    top: 15px;
+    left: 15px;
+    height: 30px;
+    width: 30px;
+  }
+
+  #page-header #hamburger .line {
+    position: absolute;
+    display: block;
+    left: 5px;
+    height: 2px;
+    background-color: white;
+  }
+
+  #page-header #hamburger .line:first-of-type {
+    -webkit-transform: translateY(8px);
+    transform: translateY(8px);
+    width: 20px;
+  }
+
+  #page-header #hamburger .line:nth-of-type(2) {
+    -webkit-transform: translateY(15px);
+    transform: translateY(15px);
+    width: 18px;
+  }
+
+  #page-header #hamburger .line:last-of-type {
+    -webkit-transform: translateY(22px);
+    transform: translateY(22px);
+    width: 16px;
+  }
+
+  #page-header #hamburger:active .line:first-of-type {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+
+  #page-header #hamburger:active .line:last-of-type {
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+  }
+
+  #sidebar-nav {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    height: 100vh;
+    width: 400px;
+    background-color: #efefef;
+    box-shadow: 0 0 0 0 #3f3f3f;
+    -webkit-transform: translateX(-400px);
+    transform: translateX(-400px);
+    transition: -webkit-transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
+  }
+
+  #sidebar-nav #sidebar-header {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    background-color: #0a94ab;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/material-header.jpg");
+    background-size: cover;
+  }
+
+  #sidebar-nav #sidebar-header #codepen-link {
+    position: relative;
+    display: block;
+    top: 30px;
+    left: 30px;
+    height: 80px;
+    width: 80px;
+    z-index: 10;
+    border-radius: 50%;
+    box-sizing: border-box;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/544318/logo.jpg");
+    background-position: center center;
+    background-size: cover;
+    opacity: 0.6;
+    transition: all 0.25s;
+  }
+
+  #sidebar-nav #sidebar-header #codepen-link:hover {
+    opacity: 1;
+    box-shadow: 0 2px 6px #0f0f0f;
+  }
+
+  #sidebar-nav #sidebar-header #profile-info {
+    position: relative;
+    top: 15px;
+    padding: 30px;
+  }
+
+  #sidebar-nav #sidebar-header #profile-info #profile-name {
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  #sidebar-nav #sidebar-header #btn-more {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  #sidebar-nav #sidebar-header #btn-more .dot {
+    display: block;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    background-color: white;
+  }
+
+  #sidebar-nav #sidebar-nav-list {
+    position: relative;
+    background-color: #efefef;
+    list-style: none;
+
+  }
+
+  #sidebar-nav #sidebar-nav-list:hover {
+    list-style: none;
+    text-decoration: none;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item {
+    position: relative;
+    z-index: 4;
+    box-shadow: 0 2px 4px transparent;
+    opacity: 0;
+    -webkit-transform: translateX(-30px);
+    transform: translateX(-30px);
+    transition: all 0.25s ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    background-color: #efefef;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item a {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 0 20px 30px;
+    color: #3f3f3f;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item a .material-icons {
+    padding: 0 8px 2px 0;
+    color: #f55e22;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:hover {
+    z-index: 5;
+    background-color: white;
+    box-shadow: 0 2px 4px #6f6f6f;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(1) {
+    -webkit-animation-delay: 0.05s;
+    animation-delay: 0.05s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(2) {
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(3) {
+    -webkit-animation-delay: 0.15s;
+    animation-delay: 0.15s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(4) {
+    -webkit-animation-delay: 0.2s;
+    animation-delay: 0.2s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(5) {
+    -webkit-animation-delay: 0.25s;
+    animation-delay: 0.25s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(6) {
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(7) {
+    -webkit-animation-delay: 0.35s;
+    animation-delay: 0.35s;
+  }
+
+  #sidebar-nav #sidebar-nav-list .sidebar-nav-item:nth-child(8) {
+    -webkit-animation-delay: 0.4s;
+    animation-delay: 0.4s;
+  }
+
+  #sidebar-nav:target {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+    box-shadow: -4px 0 12px 6px #3f3f3f;
+  }
+
+  #sidebar-nav:target .sidebar-nav-item {
+    -webkit-animation: nav-item-fade-in 1s ease-in-out;
+    animation: nav-item-fade-in 1s ease-in-out;
+  }
+
+  #sidebar-nav:target+#nav-screen-overlay {
+    display: block;
+    pointer-events: auto;
+    opacity: 0.3;
+  }
+
+  #nav-screen-overlay {
+    position: fixed;
+    z-index: 2;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0f0f0f;
+    opacity: 0;
+    cursor: default;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  @-webkit-keyframes nav-item-fade-in {
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+    }
+  }
+
+  @keyframes nav-item-fade-in {
+    to {
+      opacity: 1;
+      -webkit-transform: translateX(0px);
+      transform: translateX(0px);
+    }
+  }
+
+
+  .search-wrapper {
+    position: absolute;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+  }
+
+  .search-wrapper.active {}
+
+  .search-wrapper .input-holder {
+    overflow: hidden;
+    height: 70px;
+    background: rgba(255, 255, 255, 0);
+    border-radius: 6px;
+    position: relative;
+    width: 70px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .search-wrapper.active .input-holder {
+    border-radius: 50px;
+    width: 450px;
+    background: rgba(34, 215, 228, 0.5);
+    -webkit-transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    -moz-transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+  }
+
+  .search-wrapper .input-holder .search-input {
+    width: 100%;
+    height: 50px;
+    padding: 0px 70px 0 20px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: transparent;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: "Open Sans", Arial, Verdana;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #FFF;
+    -webkit-transform: translate(0, 60px);
+    -moz-transform: translate(0, 60px);
+    transform: translate(0, 60px);
+    -webkit-transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    -moz-transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    transition: all .3s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+
+    -webkit-transition-delay: 0.3s;
+    -moz-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+  }
+
+  .search-wrapper.active .input-holder .search-input {
+    opacity: 1;
+    -webkit-transform: translate(0, 10px);
+    -moz-transform: translate(0, 10px);
+    transform: translate(0, 10px);
+  }
+
+  .search-wrapper .input-holder .search-icon {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 6px;
+    background: #FFF;
+    padding: 0px;
+    outline: none;
+    position: relative;
+    z-index: 2;
+    float: right;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .search-wrapper.active .input-holder .search-icon {
+    width: 50px;
+    height: 50px;
+    margin: 10px;
+    border-radius: 30px;
+  }
+
+  .search-wrapper .input-holder .search-icon span {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+    -moz-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+    transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+
+  }
+
+  .search-wrapper.active .input-holder .search-icon span {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+  }
+
+  .search-wrapper .input-holder .search-icon span::before,
+  .search-wrapper .input-holder .search-icon span::after {
+    position: absolute;
+    content: '';
+  }
+
+  .search-wrapper .input-holder .search-icon span::before {
+    width: 4px;
+    height: 11px;
+    left: 9px;
+    top: 18px;
+    border-radius: 2px;
+    background: aqua;
+  }
+
+  .search-wrapper .input-holder .search-icon span::after {
+    width: 14px;
+    height: 14px;
+    left: 0px;
+    top: 0px;
+    border-radius: 16px;
+    border: 4px solid aqua;
+  }
+
+  .search-wrapper .close {
+    position: absolute;
+    z-index: 1;
+    top: 24px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+    -webkit-transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
+    -moz-transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
+    transition: all .3s cubic-bezier(0.285, -0.450, 0.935, 0.110);
+    -webkit-transition-delay: 0.2s;
+    -moz-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+  }
+
+  .search-wrapper.active .close {
+    right: -50px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    -moz-transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay: 0.5s;
+    transition-delay: 0.5s;
+  }
+
+  .search-wrapper .close::before,
+  .search-wrapper .close::after {
+    position: absolute;
+    content: '';
+    background: #FFF;
+    border-radius: 2px;
+  }
+
+  .search-wrapper .close::before {
+    width: 5px;
+    height: 25px;
+    left: 10px;
+    top: 0px;
+  }
+
+  .search-wrapper .close::after {
+    width: 25px;
+    height: 5px;
+    left: 0px;
+    top: 10px;
+  }
+
+  .search-wrapper .result-container {
+    width: 100%;
+    position: absolute;
+    top: 80px;
+    left: 0px;
+    text-align: center;
+    font-family: "Open Sans", Arial, Verdana;
+    font-size: 14px;
+    display: none;
+    color: #B7B7B7;
+  }
+
+
+  @media screen and (max-width: 560px) {
+    .search-wrapper.active .input-holder {
+      width: 200px;
+    }
+  }
+</style>
+
+<script>
+  function searchToggle(obj, evt) {
+    var container = $(obj).closest(".search-wrapper");
+
+    if (!container.hasClass("active")) {
+      container.addClass("active");
+      evt.preventDefault();
+    } else if (
+      container.hasClass("active") &&
+      $(obj).closest(".input-holder").length == 0
+    ) {
+      container.removeClass("active");
+      // clear input
+      container.find(".search-input").val("");
+      // clear and hide result container when we press close
+      container.find(".result-container").fadeOut(100, function () {
+        $(this).empty();
+      });
+    }
+  }
+
+  function submitFn(obj, evt) {
+    value = $(obj)
+      .find(".search-input")
+      .val()
+      .trim();
+
+    _html = "Searching for: ";
+    if (!value.length) {
+      _html = "Ehem, I can't search nothing";
+    } else {
+      _html += "<b>" + value + "</b>";
+    }
+
+    $(obj)
+      .find(".result-container")
+      .html("<span>" + _html + "</span>");
+    $(obj)
+      .find(".result-container")
+      .fadeIn(100);
+
+    evt.preventDefault();
+  }
+</script>

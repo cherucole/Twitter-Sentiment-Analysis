@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{{ form.media }}
+
+<body>
+    <div class="container">
+        <br><br>
+       
+        <div class="row">
+            <h3 style="color: white; text-align: center;">My Updates</h3>
+            <br>
+            {% for post in sentiments %}
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+
+
+                <div class="well" width='50' height='50' id="prof-post">
+                    <h5><b>
+                            <h4 style="color: green;">Title</h4>
+                        </b> {{post.user.username}}</h5>
+
+                    <h5>{{post.pub_date|timesince}} ago</h5>
+
+                    <h5><b>
+                            <h4 style="color: green;">Details</h4>
+                        </b> {{post.topic}}</h5>
+
+                    <h5><b>
+                            <h4 style="color: green;">neutral_tweets</h4>
+                        </b> {{post.neutral_tweets}}</h5>
+                    <h5><b>
+                            <h4 style="color: green;">Category</h4>
+                        </b> {{post.category}}</h5>
+                </div>
+            </div>
+
+
+
+            {% empty %}
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <h5>You have submitted 0 projects so far. Please submit projects</h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+
+<style>
+    body {
+        background: url("../../../static/img/bg5.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 20px;
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    #prof-col {
+        height: 400px;
+        width: 300px;
+        background-color: #F7F7F7;
+        opacity: 0.7;
+    }
+
+    #prof-post {
+        height: 100%;
+        background-color: #F7F7F7;
+        opacity: 0.7;
+    }
+
+    .row{
+        padding-top: 15vh;
+    }
+</style>
+
+
+
+
+
+{% endblock %}

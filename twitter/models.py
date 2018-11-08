@@ -44,10 +44,10 @@ class Profile(models.Model):
         profile = Profile.objects.filter(user=id).first()
         return profile
 
-    @classmethod
-    def get_profile_reports(cls, id):
-        user_reports = SentimentsTwitterHashtag.objects.all()
-        return user_reports
+    # @classmethod
+    # def get_profile_reports(cls, id):
+    #     user_reports = SentimentsTwitterHashtag.objects.all()
+    #     return user_reports
 
 
 class SentimentsTwitterHashtag(models.Model):
