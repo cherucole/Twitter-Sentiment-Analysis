@@ -47,7 +47,7 @@
 <body>
     <div class='wrapper'>
         <div class='header'>
-            <p class='title'>Invoice # {{invoice_id}}</p>
+            <p class='title'>Pdf report for searched topics by {{profile.username}}</p>
         </div>
         <div>
             <div class='details'>
@@ -55,13 +55,15 @@
 
                 <h5><b>
                     </b> {{post.topic}}</h5>
+                <P> {{post.postive_count}}</>
 
 
-                {% empty %}
-                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                    <h5>No reports at the moment :-( You have not searched for any topics.</h5>
-                </div>
-                {% endfor %}
+
+                    {% empty %}
+                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <h5>No reports at the moment :-( You have not searched for any topics.</h5>
+                    </div>
+                    {% endfor %}
             </div>
         </div>
 </body>
