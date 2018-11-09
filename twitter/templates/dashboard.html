@@ -17,8 +17,11 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                <div class="card-body">
+            <a href="#positive">
+
+                <div class="card text-white mb-3" style="max-width: 18rem;background-color:rgb(20, 245, 121);"">
+                <div class="
+                    card-body">
                     <h5 class="card-title"><img src="../static/images/positive.png" alt=""><span class="badge badge-pill badge-light">
                             Positive tweets</span></h5>
                     <p class="card-text">
@@ -27,9 +30,11 @@
                 </div>
                 <div class="card-header"><a href="#positive">View details</a><img src="../static/images/arrow.png" alt=""
                         style="float:right;"></div>
-            </div>
         </div>
-        <div class="col-md-3">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#neutral">
             <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><img src="../static/images/neutral.png" alt=""><span class="badge badge-pill badge-light">
@@ -38,10 +43,14 @@
                         <h2>40</h2>
                     </p>
                 </div>
-                <div class="card-header"><a href="">View details</a><img src="../static/images/arrow.png" alt="" style="float:right;"></div>
+                <div class="card-header"><a href="#neutral">View details</a><img src="../static/images/arrow.png" alt=""
+                        style="float:right;"></div>
             </div>
-        </div>
-        <div class="col-md-3">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#negative">
+
             <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
                 <div class="card-body">
                     <h5 class="card-title"><img src="../static/images/negative.png" alt=""><span class="badge badge-pill badge-light">
@@ -53,7 +62,8 @@
                 <div class="card-header"><a href="#negative">View details</a><img src="../static/images/arrow.png" alt=""
                         style="float:right;"></div>
             </div>
-        </div>
+        </a>
+    </div>
     </div>
 
 
@@ -98,7 +108,7 @@
             </div>
             <br>
             <br>
-            <div class="card" style="background-color:aqua;">
+            <div class="card" style="background-color:rgb(20, 245, 121);" id="positive">
 
                 <div class="card-header">
                     <h2>positive tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
@@ -114,41 +124,33 @@
             </div>
             <br>
             <br>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>Neutral tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+            <div class="card" style="background-color:#42A3B8;" id="neutral">
+                <div class="card-header">
+                    <h2>Neutral tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
 
-                        </div>
-                        {% for tweet in neutral_tweets %}
-                        <div class="card-body">
-                            {{ tweet }}
-
-                        </div>
-
-                        {% endfor %}
-                    </div>
                 </div>
+                {% for tweet in neutral_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
             </div>
             <br>
             <br>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>Negative tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+            <div class="card" style="background-color:rgb(255, 0, 98);" id="negative">
+                <div class="card-header">
+                    <h2>Negative tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
 
-                        </div>
-                        {% for tweet in negative_tweets %}
-                        <div class="card-body">
-                            {{ tweet }}
-
-                        </div>
-
-                        {% endfor %}
-                    </div>
                 </div>
+                {% for tweet in negative_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
             </div>
         </div>
 
