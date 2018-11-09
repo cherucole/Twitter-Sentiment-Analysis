@@ -66,6 +66,11 @@ def analyse(request):
         negative_tweets = data['Negative_tweets'][0:5]
         neutral_tweets = data['Neutral_tweets'][0:5]
         postive_tweets = data['Postive_tweets'][0:5]
+        total_positive = len(postive_tweets)
+        total_neutral = len(neutral_tweets)
+
+        total_negative = len(negative_tweets)
+
 
         time_positive = data['time_positive']
 
@@ -83,7 +88,7 @@ def analyse(request):
                                               user=current_user
                                               )
         sentiments.save()
-        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'positive': positive, 'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'positive': positive, 'total_positive': total_positive,  'total_neutral': total_neutral, 'total_negative': total_negative,  'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})
 
 
