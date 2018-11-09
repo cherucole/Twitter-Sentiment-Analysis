@@ -25,10 +25,12 @@ from .forms import *
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 # Create your views here.
 
+
 def index(request):
 
     return render(request, 'index.html')
-    
+
+
 @login_required(login_url='/login/')
 def dashboard(request):
 
@@ -38,8 +40,6 @@ def dashboard(request):
 def privacy(request):
 
     return render(request, 'privacy.html')
-
-
 
 
 def query(request):
@@ -71,9 +71,6 @@ def analyse(request):
 
         listt = time_positive.keys()
         print(min(listt))
-        # print(data['Positive'])
-        # print(negative_tweets)
-        # print(data)
         sentiments = SentimentsTwitterHashtag(topic=topic,
                                               sample_size=sample,
                                               postive_count=positive,
@@ -107,13 +104,15 @@ def register(request):
             form = RegistrationForm()
         return render(request, 'registration/signup.html', {'form': form})
 
+
 def profilehistory(request, username):
     profile = User.objects.get(username=username)
     try:
         profile_details = Profile.get_by_id(profile.id)
     except:
         profile_details = Profile.filter_by_id(profile.id)
-    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)[
+        0:5]
 
     title = f'@{profile.username} Projects'
 
@@ -127,7 +126,6 @@ def profile(request, username):
     except:
         profile_details = Profile.filter_by_id(profile.id)
     sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
-
     title = f'@{profile.username} Projects'
 
     return render(request, 'profile/profile.html', {'title': title, 'profile': profile, 'sentiments': sentiments, 'profile_details': profile_details})
@@ -146,11 +144,12 @@ def edit_profile(request):
 
     return render(request, 'profile/edit_profile.html', {'form': form})
 
+
 @login_required(login_url='/login/')
 def get_pdf(request, username, *args, **kwargs):
     template = get_template('pdf/reports.html')
     profile = User.objects.get(username=username)
-    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)[0:5]
 
     inv = 'test invoice id to render content'
     context = {
@@ -173,14 +172,17 @@ def get_pdf(request, username, *args, **kwargs):
         return response
     return HttpResponse("Not found")
 
+
 def export_users_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="reports.csv"'
 
     writer = csv.writer(response)
-    writer.writerow(['Topic', 'Sample size', 'Postive count', 'Neutral count', 'Negative count', 'Neutral tweets', 'Negative tweets', 'Postive tweets'])
+    writer.writerow(['Topic', 'Sample size', 'Postive count', 'Neutral count',
+                     'Negative count', 'Neutral tweets', 'Negative tweets', 'Postive tweets'])
 
-    reports = SentimentsTwitterHashtag.objects.all().values_list('topic', 'sample_size', 'postive_count', 'neutral_count', 'negative_count', 'neutral_tweets', 'negative_tweets', 'postive_tweets')
+    reports = SentimentsTwitterHashtag.objects.all().values_list('topic', 'sample_size', 'postive_count',
+                                                                 'neutral_count', 'negative_count', 'neutral_tweets', 'negative_tweets', 'postive_tweets')
     for report in reports:
         writer.writerow(report)
 
