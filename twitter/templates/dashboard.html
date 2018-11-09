@@ -98,23 +98,19 @@
             </div>
             <br>
             <br>
-            <div class="card">
-                <div class="card-body">
+            <div class="card" style="background-color:aqua;">
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h2>positive tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+                <div class="card-header">
+                    <h2>positive tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
 
-                        </div>
-                        {% for tweet in postive_tweets %}
-                        <div class="card-body">
-                            {{ tweet }}
-
-                        </div>
-
-                        {% endfor %}
-                    </div>
                 </div>
+                {% for tweet in postive_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
             </div>
             <br>
             <br>
