@@ -1,30 +1,595 @@
-{% extends 'base.html' %}
+{%extends 'base.html'%}
+{% load bootstrap4 %}
+{% load static %}
 {% block content %}
-<div class="row">
-    <br>
-    <br>
-    <div id="input_hastag" class="col s12">
-        <form method="get" action="{% url 'analyse' %} ">
-            <br>
-            <br><br>
-            <br>
-            <div class="input-field col s4 m3 l2 offset-s2 offset-m2 offset-l2">
-                123
-                <label for="{{ input_hastag.q.id_for_label }}">Input Hashtag:</label>
-                {{ input_hastag.q }}
+
+<body>
+
+    <div class="col-md-12 row container">
+        <div class="col-md-3">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h4 class="card-title">Topic: {{topic}}</h4>
+                    <p class="card-text">
+                        <br>
+                        Sample size: {{total}} tweets
+                        <br>
+                        Click on side bar to export
+                        <br>
+                        Supported: pdf, csv, excel
+                    </p>
+                </div>
+                <div class="card-header"><a href="">View details</a></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <a href="#positive">
+
+                <div class="card text-white mb-3" style="max-width: 18rem;background-color:rgb(20, 245, 121);"">
+                <div class="
+                    card-body">
+                    <h5 class="card-title"><img src="../static/images/positive.png" alt=""><span class="badge badge-pill badge-light">
+                            Positive tweets</span></h5>
+                    <p class="card-text">
+                        <h2>{{total_positive}} tweets</h2>
+                    </p>
+                </div>
+                <div class="card-header"><a href="#positive">View details</a><img src="../static/images/arrow.png" alt=""
+                        style="float:right;"></div>
+        </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#neutral">
+            <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><img src="../static/images/neutral.png" alt=""><span class="badge badge-pill badge-light">
+                            Neutral tweets</span></h5>
+                    <p class="card-text">
+                        <h2>{{total_neutral}} tweets</h2>
+                    </p>
+                </div>
+                <div class="card-header"><a href="#neutral">View details</a><img src="../static/images/arrow.png" alt=""
+                        style="float:right;"></div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="#negative">
+
+            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><img src="../static/images/negative.png" alt=""><span class="badge badge-pill badge-light">
+                            Negative tweets</span></h5>
+                    <p class="card-text">
+                        <h2>{{total_negative}} tweets</h2>
+                    </p>
+                </div>
+                <div class="card-header"><a href="#negative">View details</a><img src="../static/images/arrow.png" alt=""
+                        style="float:right;"></div>
+            </div>
+        </a>
+    </div>
+    </div>
+
+
+    <div class="col-md-12 row container">
+        <div class="col-md-8">
+            <div class="card" align="center">
+                <div class="card-header">
+                    Pie Chart </div>
+                <h1>{{topic}}</h1>
+                <div class="col-md-6 d-flex justify-content-center">
+                    <canvas id="pie-chart" width="250" height="250"></canvas>
+                    <script>
+                        var ctx = document.getElementById("pie-chart");
+                        var pos = JSON.parse('{{positive}}')
+                        var neut = JSON.parse('{{neutral}}')
+                        var neg = JSON.parse('{{negative}}')
+                        console.log(pos)
+                        var myChart = new Chart(ctx, {
+                            type: 'polarArea',
+                            data: {
+                                labels: ["Positive", "Neutral", "Negative"],
+                                datasets: [{
+                                    label: 'of 500 sample anayzed tweet',
+                                    data: [pos, neut, neg],
+                                    backgroundColor: [
+                                        'rgba(0, 255, 0, 0.3)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 0, 0, 0.3)',
+
+                                    ],
+                                    borderColor: [
+                                        'rgba(0, 255, 0, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 0, 0, 1)',
+                                    ],
+                                }]
+                            },
+                        });
+                    </script>
+                </div>
             </div>
             <br>
-            <button type="submit" class="btn btn-link">Anlyse send</button>
-        </form>
-        1 <a href="{% url 'reports' username=user.username %}">Download My Reports</a>
-        2<a href="{% url 'export_csv' %}">Export Excel Reports</a>
+            <br>
+            <div class="card" style="background-color:rgb(20, 245, 121);" id="positive">
 
+                <div class="card-header">
+                    <h2>positive tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+
+                </div>
+                {% for tweet in postive_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+            <div class="card" style="background-color:#42A3B8;" id="neutral">
+                <div class="card-header">
+                    <h2>Neutral tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+
+                </div>
+                {% for tweet in neutral_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+            <div class="card" style="background-color:rgb(255, 0, 98);" id="negative">
+                <div class="card-header">
+                    <h2>Negative tweets <img src="../static/images/icons8-twitter-50.png" alt=""></h2>
+
+                </div>
+                {% for tweet in negative_tweets %}
+                <div class="card-body">
+                    {{ tweet }}
+
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    Bar graph </div>
+                <div class="results-bar col-md-6">
+                    <canvas id="bar-chart" width="250" height="250"></canvas>
+                    <script>
+                        var ctx = document.getElementById("bar-chart");
+                        var pos = JSON.parse('{{positive}}')
+                        var neut = JSON.parse('{{neutral}}')
+                        var neg = JSON.parse('{{negative}}')
+                        console.log(pos)
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["Positive", "Neutral", "Negative"],
+                                datasets: [{
+                                    label: 'of 500 sample anayzed tweet',
+                                    data: [pos, neut, neg],
+                                    backgroundColor: [
+                                        'rgba(0, 255, 0, 0.3)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 0, 0, 0.3)',
+
+                                    ],
+                                    borderColor: [
+                                        'rgba(0, 255, 0, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 0, 0, 1)',
+                                    ],
+                                }]
+                            },
+                            options: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Bar graph showing tweets sentiment'
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    Linear chart
+                </div>
+                <div class="card-body">
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/csv" class=" btn btn-primary">See reports</a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="container">
-    <h1>Some Line Charts loaded in Ajax!</h1>
 
 
-</div>
+
+
+
+</body>
+
+<script type="text/javascript" src="https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}"></script>
+<style>
+    body {
+        background: url("../../../static/img/bg1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 650px;
+        padding-top: 7vh;
+    }
+
+    .card {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+
+    }
+
+    h2 {
+        color: white;
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 4vh;
+        margin: 2vw;
+    }
+
+
+
+    .wrapper {
+        display: block;
+        margin: 5em auto;
+        border: 1px solid #555;
+        width: 700px;
+        height: 350px;
+        position: relative;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    .label {
+        height: 1em;
+        padding: .3em;
+        background: rgba(255, 255, 255, .8);
+        position: absolute;
+        display: none;
+        color: #333;
+
+    }
+</style>
+
+<script>
+    var label = document.querySelector(".label");
+    var c = document.getElementById("c");
+    var ctx = c.getContext("2d");
+    var cw = c.width = 700;
+    var ch = c.height = 350;
+    var cx = cw / 2,
+        cy = ch / 2;
+    var rad = Math.PI / 180;
+    var frames = 0;
+
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#999";
+    ctx.fillStyle = "#ccc";
+    ctx.font = "14px monospace";
+
+    var grd = ctx.createLinearGradient(0, 0, 0, cy);
+    grd.addColorStop(0, "hsla(167,72%,60%,1)");
+    grd.addColorStop(1, "hsla(167,72%,60%,0)");
+
+    var oData = {
+        "2008": 10,
+        "2009": 39.9,
+        "2010": 17,
+        "2011": 30.0,
+        "2012": 5.3,
+        "2013": 38.4,
+        "2014": 15.7,
+        "2015": 9.0
+    };
+
+    var valuesRy = [];
+    var propsRy = [];
+    for (var prop in oData) {
+
+        valuesRy.push(oData[prop]);
+        propsRy.push(prop);
+    }
+
+
+    var vData = 4;
+    var hData = valuesRy.length;
+    var offset = 50.5; //offset chart axis
+    var chartHeight = ch - 2 * offset;
+    var chartWidth = cw - 2 * offset;
+    var t = 1 / 7; // curvature : 0 = no curvature 
+    var speed = 2; // for the animation
+
+    var A = {
+        x: offset,
+        y: offset
+    }
+    var B = {
+        x: offset,
+        y: offset + chartHeight
+    }
+    var C = {
+        x: offset + chartWidth,
+        y: offset + chartHeight
+    }
+
+    /*
+          A  ^
+            |  |  
+            + 25
+            |
+            |
+            |
+            + 25  
+          |__|_________________________________  C
+          B
+    */
+
+    // CHART AXIS -------------------------
+    ctx.beginPath();
+    ctx.moveTo(A.x, A.y);
+    ctx.lineTo(B.x, B.y);
+    ctx.lineTo(C.x, C.y);
+    ctx.stroke();
+
+    // vertical ( A - B )
+    var aStep = (chartHeight - 50) / (vData);
+
+    var Max = Math.ceil(arrayMax(valuesRy) / 10) * 10;
+    var Min = Math.floor(arrayMin(valuesRy) / 10) * 10;
+    var aStepValue = (Max - Min) / (vData);
+    console.log("aStepValue: " + aStepValue); //8 units
+    var verticalUnit = aStep / aStepValue;
+
+    var a = [];
+    ctx.textAlign = "right";
+    ctx.textBaseline = "middle";
+    for (var i = 0; i <= vData; i++) {
+
+        if (i == 0) {
+            a[i] = {
+                x: A.x,
+                y: A.y + 25,
+                val: Max
+            }
+        } else {
+            a[i] = {}
+            a[i].x = a[i - 1].x;
+            a[i].y = a[i - 1].y + aStep;
+            a[i].val = a[i - 1].val - aStepValue;
+        }
+        drawCoords(a[i], 3, 0);
+    }
+
+    //horizontal ( B - C )
+    var b = [];
+    ctx.textAlign = "center";
+    ctx.textBaseline = "hanging";
+    var bStep = chartWidth / (hData + 1);
+
+    for (var i = 0; i < hData; i++) {
+        if (i == 0) {
+            b[i] = {
+                x: B.x + bStep,
+                y: B.y,
+                val: propsRy[0]
+            };
+        } else {
+            b[i] = {}
+            b[i].x = b[i - 1].x + bStep;
+            b[i].y = b[i - 1].y;
+            b[i].val = propsRy[i]
+        }
+        drawCoords(b[i], 0, 3)
+    }
+
+    function drawCoords(o, offX, offY) {
+        ctx.beginPath();
+        ctx.moveTo(o.x - offX, o.y - offY);
+        ctx.lineTo(o.x + offX, o.y + offY);
+        ctx.stroke();
+
+        ctx.fillText(o.val, o.x - 2 * offX, o.y + 2 * offY);
+    }
+    //----------------------------------------------------------
+
+    // DATA
+    var oDots = [];
+    var oFlat = [];
+    var i = 0;
+
+    for (var prop in oData) {
+        oDots[i] = {}
+        oFlat[i] = {}
+
+        oDots[i].x = b[i].x;
+        oFlat[i].x = b[i].x;
+
+        oDots[i].y = b[i].y - oData[prop] * verticalUnit - 25;
+        oFlat[i].y = b[i].y - 25;
+
+        oDots[i].val = oData[b[i].val];
+
+        i++
+    }
+
+
+
+    ///// Animation Chart ///////////////////////////
+    //var speed = 3;
+    function animateChart() {
+        requestId = window.requestAnimationFrame(animateChart);
+        frames += speed; //console.log(frames)
+        ctx.clearRect(60, 0, cw, ch - 60);
+
+        for (var i = 0; i < oFlat.length; i++) {
+            if (oFlat[i].y > oDots[i].y) {
+                oFlat[i].y -= speed;
+            }
+        }
+        drawCurve(oFlat);
+        for (var i = 0; i < oFlat.length; i++) {
+            ctx.fillText(oDots[i].val, oFlat[i].x, oFlat[i].y - 25);
+            ctx.beginPath();
+            ctx.arc(oFlat[i].x, oFlat[i].y, 3, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        if (frames >= Max * verticalUnit) {
+            window.cancelAnimationFrame(requestId);
+
+        }
+    }
+    requestId = window.requestAnimationFrame(animateChart);
+
+    /////// EVENTS //////////////////////
+    c.addEventListener("mousemove", function (e) {
+        label.innerHTML = "";
+        label.style.display = "none";
+        this.style.cursor = "default";
+
+        var m = oMousePos(this, e);
+        for (var i = 0; i < oDots.length; i++) {
+
+            output(m, i);
+        }
+
+    }, false);
+
+    function output(m, i) {
+        ctx.beginPath();
+        ctx.arc(oDots[i].x, oDots[i].y, 20, 0, 2 * Math.PI);
+        if (ctx.isPointInPath(m.x, m.y)) {
+            //console.log(i);
+            label.style.display = "block";
+            label.style.top = (m.y + 10) + "px";
+            label.style.left = (m.x + 10) + "px";
+            label.innerHTML = "<strong>" + propsRy[i] + "</strong>: " + valuesRy[i] + "%";
+            c.style.cursor = "pointer";
+        }
+    }
+
+    // CURVATURE
+    function controlPoints(p) {
+        // given the points array p calculate the control points
+        var pc = [];
+        for (var i = 1; i < p.length - 1; i++) {
+            var dx = p[i - 1].x - p[i + 1].x; // difference x
+            var dy = p[i - 1].y - p[i + 1].y; // difference y
+            // the first control point
+            var x1 = p[i].x - dx * t;
+            var y1 = p[i].y - dy * t;
+            var o1 = {
+                x: x1,
+                y: y1
+            };
+
+            // the second control point
+            var x2 = p[i].x + dx * t;
+            var y2 = p[i].y + dy * t;
+            var o2 = {
+                x: x2,
+                y: y2
+            };
+
+            // building the control points array
+            pc[i] = [];
+            pc[i].push(o1);
+            pc[i].push(o2);
+        }
+        return pc;
+    }
+
+    function drawCurve(p) {
+
+        var pc = controlPoints(p); // the control points array
+
+        ctx.beginPath();
+        //ctx.moveTo(p[0].x, B.y- 25);
+        ctx.lineTo(p[0].x, p[0].y);
+        // the first & the last curve are quadratic Bezier
+        // because I'm using push(), pc[i][1] comes before pc[i][0]
+        ctx.quadraticCurveTo(pc[1][1].x, pc[1][1].y, p[1].x, p[1].y);
+
+        if (p.length > 2) {
+            // central curves are cubic Bezier
+            for (var i = 1; i < p.length - 2; i++) {
+                ctx.bezierCurveTo(pc[i][0].x, pc[i][0].y, pc[i + 1][1].x, pc[i + 1][1].y, p[i + 1].x, p[i + 1].y);
+            }
+            // the first & the last curve are quadratic Bezier
+            var n = p.length - 1;
+            ctx.quadraticCurveTo(pc[n - 1][0].x, pc[n - 1][0].y, p[n].x, p[n].y);
+        }
+
+        //ctx.lineTo(p[p.length-1].x, B.y- 25);
+        ctx.stroke();
+        ctx.save();
+        ctx.fillStyle = grd;
+        ctx.fill();
+        ctx.restore();
+    }
+
+    function arrayMax(array) {
+        return Math.max.apply(Math, array);
+    };
+
+    function arrayMin(array) {
+        return Math.min.apply(Math, array);
+    };
+
+    function oMousePos(canvas, evt) {
+        var ClientRect = canvas.getBoundingClientRect();
+        return { //objeto
+            x: Math.round(evt.clientX - ClientRect.left),
+            y: Math.round(evt.clientY - ClientRect.top)
+        }
+    }
+
+    google.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ["Task", "Hours per Day"],
+            ["Positive tweets", 11],
+            ["Neutral tweets", 2],
+            ["Negative tweets", 7]
+        ]);
+
+        var options = {
+            title: "My Daily Activities"
+        };
+
+        var chart = new google.visualization.PieChart(
+            document.getElementById("piechart")
+        );
+
+        chart.draw(data, options);
+    }
+</script>
 {% endblock %}

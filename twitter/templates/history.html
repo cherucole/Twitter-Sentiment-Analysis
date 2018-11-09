@@ -4,45 +4,112 @@
 {{ form.media }}
 
 <body>
+
     <div class="container">
-        <br><br>
-       
+        <div class="row" height="5px">
+            <div class="col-md-12">
+                <h2 style="color:#22CEEC">History</h2>
+
+            </div>
+
+        </div>
         <div class="row">
-            <h3 style="color: white; text-align: center;">My Updates</h3>
-            <br>
-            {% for post in sentiments %}
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 
 
-                <div class="well" width='50' height='50' id="prof-post">
-                    <h5><b>
-                            <h4 style="color: green;">Title</h4>
-                        </b> {{post.user.username}}</h5>
 
-                    <h5>{{post.pub_date|timesince}} ago</h5>
+            <div class="col-md-4">
+                <h3 style="color: white; text-align:center;">My Updates</h3>
+                <br>
+                {% for post in sentiments %}
+                <div class="card" style="padding-bottom:7vh;">
+                    <div class="well" width='50' height='50' id="prof-post">
+                        <span class="badge badge-pill badge-info" style="float:right">{{post.publication_date|timesince}}
+                            ago</span>
+                        <div style="padding-top:5vh;">
+                            <h5><b>
+                                    <h4 style="color: green; text-align:center;">Search Term: {{post.topic}}</h4>
+                                </b></h5>
 
-                    <h5><b>
-                            <h4 style="color: green;">Details</h4>
-                        </b> {{post.topic}}</h5>
 
-                    <h5><b>
-                            <h4 style="color: green;">neutral_tweets</h4>
-                        </b> {{post.neutral_tweets}}</h5>
-                    <h5><b>
-                            <h4 style="color: green;">Category</h4>
-                        </b> {{post.category}}</h5>
+                            <h5><b>
+                                    <h4 style="color: green; text-align:center;">Positive Sentiments</h4>
+                                </b> {{post.postive_tweets | safe}}</h5>
+                        </div>
+                    </div>
                 </div>
+
+
+
+                {% empty %}
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <h5>You have no positive sentiments search history</h5>
+                </div>
+                {% endfor %}
             </div>
+            <br>
+            <br>
+
+            <div class="col-md-4">
+                <h3 style="color: white; text-align: center;">My Updates</h3>
+                <br>
+                {% for post in sentiments %}
+                <div class="card" style="padding-bottom:7vh;">
+                    <div class="well" width='50' height='50' id="prof-post">
+                        <span class="badge badge-pill badge-info" style="float:right">{{post.publication_date|timesince}}
+                            ago</span>
+                        <div style="padding-top:5vh;">
+                            <h5><b>
+                                    <h4 style="color: green; text-align:center;">Search Term: {{post.topic}}</h4>
+                                </b></h5>
+
+                            <h5><b>
+                                    <h4 style="color: green; text-align:center;">Neutral Sentiments</h4>
+                                </b> {{post.neutral_tweets | safe}}</h5>
+                        </div>
+                    </div>
+                </div>
 
 
 
-            {% empty %}
-            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                <h5>You have submitted 0 projects so far. Please submit projects</h5>
+                {% empty %}
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <h5>You have no neutral sentiments search history</h5>
+                </div>
+                {% endfor %}
             </div>
-            {% endfor %}
+            <br>
+            <br>
+
+            <div class="col-md-4">
+                <h3 style="color: white; text-align: center;">My Updates</h3>
+                <br>
+                {% for post in sentiments %}
+                <div class="card" style="padding-bottom:7vh;">
+                    <div class="well" width='50' height='50' id="prof-post">
+                        <span class="badge badge-pill badge-info" style="float:right">{{post.publication_date|timesince}}
+                            ago</span>
+                        <div style="padding-top:5vh;">
+                            <h5><b>
+                                    <h4 style="color: green; text-align:center;">Search Term: {{post.topic}}</h4>
+                                </b></h5>
+                            <h5><b>
+                                    <h4 style="color: green; text-align: center;">Negative Sentiments</h4>
+                                </b> {{post.negative_tweets | safe}}</h5>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {% empty %}
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <h5>ou have no negative sentiments search history</h5>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
+
 
 </body>
 
@@ -73,7 +140,7 @@
         opacity: 0.7;
     }
 
-    .row{
+    .row {
         padding-top: 15vh;
     }
 </style>
