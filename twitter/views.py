@@ -149,7 +149,7 @@ def edit_profile(request):
 def get_pdf(request, username, *args, **kwargs):
     template = get_template('pdf/reports.html')
     profile = User.objects.get(username=username)
-    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)[0:5]
+    sentiments = SentimentsTwitterHashtag.get_profile_reports(profile.id)
 
     inv = 'test invoice id to render content'
     context = {

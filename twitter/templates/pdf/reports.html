@@ -3,6 +3,24 @@
 <head>
     <title>Title</title>
     <style type="text/css">
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+
         body {
             font-weight: 200;
             font-size: 14px;
@@ -49,23 +67,44 @@
         <div class='header'>
             <p class='title'>Pdf report for searched topics by {{profile.username}}</p>
         </div>
+        <table>
+            <tr>
+                <th>Topic</th>
+                <th>Sample size</th>
+                <th>Positive tweets</th>
+
+                <th>Negative tweets</th>
+
+                <th>Neutral tweets</th>
+            </tr>
+        </table>
         <div>
-            <div class='details'>
-                {% for post in sentiments %}
 
-                <h5><b>
-                    </b> {{post.topic}}</h5>
-                <P> {{post.postive_count}}</>
+            {% for post in sentiments %}
 
 
+            <table>
+                <tr>
+                    <th>{{post.topic}}</th>
+                    <th>{{post.postive_count}}</th>
+                    <th>{{post.negative_count}}</th>
 
-                    {% empty %}
-                    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                        <h5>No reports at the moment :-( You have not searched for any topics.</h5>
-                    </div>
-                    {% endfor %}
+                    <th>{{post.neutral_count}}</th>
+
+                    <th>{{post.sample_size}}</th>
+                </tr>
+            </table>
+
+
+
+
+            {% empty %}
+            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <h5>No reports at the moment :-( You have not searched for any topics.</h5>
             </div>
+            {% endfor %}
         </div>
+    </div>
 </body>
 
 </html>
