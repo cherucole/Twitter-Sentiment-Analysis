@@ -12,7 +12,7 @@
                     <h4 class="card-title">Topic: {{topic}}</h4>
                     <p class="card-text">
                         <br>
-                        Sample size:
+                        Sample size: {{total}} tweets
                         <br>
                         Click on side bar to export
                         <br>
@@ -77,9 +77,8 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Bar graph
-                </div>
-                <h1>{{topic}}</h1>
+                    Pie Chart </div>
+                <h1 style="align:center">{{topic}}</h1>
                 <div class="col-md-6 d-flex justify-content-center">
                     <canvas id="pie-chart" width="250" height="250"></canvas>
                     <script>
@@ -163,8 +162,7 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    Pie Chart
-                </div>
+                    Bar graph </div>
                 <div class="results-bar col-md-6">
                     <canvas id="bar-chart" width="250" height="250"></canvas>
                     <script>
@@ -210,13 +208,13 @@
             <br>
             <div class="card">
                 <div class="card-header">
-                    Donought chart example
+                    Linear chart
                 </div>
                 <div class="card-body">
                     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                     <h5 class="card-title">Special title treatment</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    <a href="/csv" class=" btn btn-primary">See reports</a>
                 </div>
             </div>
         </div>

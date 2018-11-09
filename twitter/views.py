@@ -71,7 +71,6 @@ def analyse(request):
 
         total_negative = len(negative_tweets)
 
-
         time_positive = data['time_positive']
 
         listt = time_positive.keys()
@@ -88,7 +87,7 @@ def analyse(request):
                                               user=current_user
                                               )
         sentiments.save()
-        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'positive': positive, 'total_positive': total_positive,  'total_neutral': total_neutral, 'total_negative': total_negative,  'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'total': sample, 'positive': positive, 'total_positive': total_positive,  'total_neutral': total_neutral, 'total_negative': total_negative,  'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})
 
 
