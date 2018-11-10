@@ -38,6 +38,8 @@ def getdata(input_hashtag):
     for tweet in Tweets:
         print(tweet.user.location)  # location works for some
         print(tweet.user.screen_name)  # location works for some
+        print(tweet.user.profile_image_url)  # location works for some
+
         print('string is ' + str(tweet.id_str))
         # print(tweet)
         # print(tweet.text)
