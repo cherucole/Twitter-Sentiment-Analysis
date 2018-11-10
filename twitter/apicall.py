@@ -44,7 +44,7 @@ def getdata(input_hashtag):
         print('user favourites are:' + str(tweet.user.favourites_count))
         print('retweets are: ' + str(tweet.retweet_count))
         print('favs are: ' + str(tweet.favorite_count))
-
+        print(tweet.text)
         # print('retweets are: ' + str(tweet.retweet_count))
         # print('favs are: ' + str(tweet.favorite_count))
 
