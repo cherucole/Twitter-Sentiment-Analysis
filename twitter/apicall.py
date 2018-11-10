@@ -12,7 +12,7 @@ def getdata(input_hashtag):
 
     api = tweepy.API(auth)
 
-    N = 100  # number of tweets
+    N = 1  # number of tweets
     # Tweets = api.user_timeline(id=input_hashtag, count=N)
     Tweets = tweepy.Cursor(api.search, q=input_hashtag,
                            lang="en").items(N)
@@ -34,7 +34,13 @@ def getdata(input_hashtag):
     #     print("no tweets for now")
     # else:
     # print(Tweets)
+    # the key for profile image on tweet json is 'profile_image_url'
     for tweet in Tweets:
+        print(tweet.user.location)  # location works for some
+        print(tweet.user.screen_name)  # location works for some
+        print('string is ' + str(tweet.id_str))
+        # print(tweet)
+        # print(tweet.text)
         # print(tweet.created_at)
         # print(tweet.user.location)
         # print("placeid:%s" % tweet)

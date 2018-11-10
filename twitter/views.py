@@ -80,7 +80,7 @@ def analyse(request):
         time_positive = data['time_positive']
 
         listt = time_positive.keys()
-        print(min(listt))
+        # print(min(listt))
         sentiments = SentimentsTwitterHashtag(topic=topic,
                                               sample_size=sample,
                                               postive_count=positive,
@@ -93,8 +93,7 @@ def analyse(request):
                                               user=current_user
                                               )
         sentiments.save()
-        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'total': sample, 'positive': positive, 'total_positive': postive_tweets1,  'total_neutral': neutral_tweets1
-        , 'total_negative': negative_tweets1,  'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
+        return render(request, "dashboard.html", {'data': data, 'topic': topic, 'total': sample, 'positive': positive, 'total_positive': postive_tweets1,  'total_neutral': neutral_tweets1, 'total_negative': negative_tweets1,  'sample': sample, 'neutral': neutral, 'negative': negative, 'negative_tweets': negative_tweets, 'neutral_tweets': neutral_tweets, 'postive_tweets': postive_tweets})
     return render(request, "search.html", {'input_hastag': user_input})
 
 
