@@ -39,7 +39,14 @@ def getdata(input_hashtag):
         print(tweet.user.location)  # location works for some
         print(tweet.user.screen_name)  # location works for some
         print(tweet.user.profile_image_url)  # location works for some
-        print(tweet.user.followers_count)  # location works for some
+        # location works for some
+        print('followers are: ' + str(tweet.user.followers_count))
+        print('user favourites are:' + str(tweet.user.favourites_count))
+        print('retweets are: ' + str(tweet.retweet_count))
+        print('favs are: ' + str(tweet.favorite_count))
+
+        # print('retweets are: ' + str(tweet.retweet_count))
+        # print('favs are: ' + str(tweet.favorite_count))
 
         print('string is ' + str(tweet.id_str))
         # print(tweet)
