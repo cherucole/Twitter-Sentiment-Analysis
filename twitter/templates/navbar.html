@@ -29,9 +29,8 @@
   </form>
 </header>
 <nav id="sidebar-nav" style="position:fixed;width: 18rem;">
-  <header id="sidebar-header"><img src="../../static/images/profile.png" alt="">
-      <h3 id="profile-name" style="color:#ffffff">{{ request.user.username }}</h3>
-    </div>
+  <header id="sidebar-header"><img style="padding-left:2rem;height: 45%;" src="../../static/images/profile.png" alt="">
+    <h3 id="profile-name" style="padding-left:1.4rem;color:#ffffff">{{ request.user.username }}</h3>
     <ul id="sidebar-nav-list">
       <li class="sidebar-nav-item" id="nav-item-home"><a href="/"><i class="material-icons"><img src="../static/images/home.png"
               alt=""></i>Home</a></li>
