@@ -40,15 +40,18 @@ def getdata(input_hashtag):
         print(tweet.user.screen_name)  # to show username
         print(tweet.user.profile_image_url)  # to show profile image
         # location works for some
-        print('followers are: ' + str(tweet.user.followers_count)) #followers
-        print('user favourites are:' + str(tweet.user.favourites_count)) #number of user favourites
-        print('retweets are: ' + str(tweet.retweet_count)) #number of tweet retweets
-        print('favs are: ' + str(tweet.favorite_count)) #number of tweet favourites 
-        print(tweet.text)  #tweet itself
+        print('followers are: ' + str(tweet.user.followers_count))  # followers
+        # number of user favourites
+        print('user favourites are:' + str(tweet.user.favourites_count))
+        # number of tweet retweets
+        print('retweets are: ' + str(tweet.retweet_count))
+        # number of tweet favourites
+        print('favs are: ' + str(tweet.favorite_count))
+        print(tweet.text)  # tweet itself
         # print('retweets are: ' + str(tweet.retweet_count))
         # print('favs are: ' + str(tweet.favorite_count))
 
-        print('string is ' + str(tweet.id_str)) #tweet id
+        print('string is ' + str(tweet.id_str))  # tweet id
         # print(tweet)
         # print(tweet.text)
         # print(tweet.created_at)
@@ -56,22 +59,57 @@ def getdata(input_hashtag):
         # print("placeid:%s" % tweet)
         # print(tweet.id_str, tweet.coordinates, tweet.geo, tweet.geocode)
         # print(tweet.place.country)
+        avatar = tweet.user.profile_image_url
+        username = tweet.user.screen_name
+        followers = tweet.user.followers_count
+        retweets = tweet.retweet_count
+        likes = tweet.favorite_count
         general_location.append(tweet.user.location)
         blob = TextBlob(tweet.text)
         if blob.sentiment.polarity < 0:
+            tweet_full = []
             negative += blob.sentiment.polarity
             negative_count += 1
-            tweets_neg.append(tweet.text)
-            time_negative[tweet.created_at] = tweet.text
+            # tweets_neg.append(tweet.text)
+            tweet_full.append(tweet.text)
+            tweet_full.append(username)
+            tweet_full.append(avatar)
+            tweet_full.append(followers)
+            tweet_full.append(retweets)
+            tweet_full.append(likes)
+
+            tweets_neg.append(tweet_full)
+            # time_negative[tweet.created_at] = tweet.text
         elif blob.sentiment.polarity == 0:
+            tweet_full = []
+
             neutral_count += 1
-            tweets_nut.append(tweet.text)
-            time_neutral[tweet.created_at] = tweet.text
+            # tweets_nut.append(tweet.text)
+            tweet_full.append(tweet.text)
+            tweet_full.append(username)
+            tweet_full.append(avatar)
+            tweet_full.append(followers)
+            tweet_full.append(retweets)
+            tweet_full.append(likes)
+
+            tweets_nut.append(tweet_full)
+
+            # time_neutral[tweet.created_at] = tweet.text
         else:
             positive += blob.sentiment.polarity
+            tweet_full = []
+
             postive_count += 1
-            tweets_pos.append(tweet.text)
-            time_positive[tweet.created_at] = tweet.text
+            # tweets_pos.append(tweet.text)
+            tweet_full.append(tweet.text)
+            tweet_full.append(username)
+            tweet_full.append(avatar)
+            tweet_full.append(followers)
+            tweet_full.append(retweets)
+            tweet_full.append(likes)
+
+            tweets_pos.append(tweet_full)
+            # time_positive[tweet.created_at] = tweet.text
 
     # post = ("Positive ", float(postive_count/N)*100, "%")
 
