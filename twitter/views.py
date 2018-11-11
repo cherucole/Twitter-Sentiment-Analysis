@@ -78,9 +78,9 @@ def analyse(request):
 
         total_negative = len(negative_tweets)
 
-        time_positive = data['time_positive']
+        # time_positive = data['time_positive']
 
-        listt = time_positive.keys()
+        # listt = time_positive.keys()
         # print(min(listt))
         sentiments = SentimentsTwitterHashtag(topic=topic,
                                               sample_size=sample,

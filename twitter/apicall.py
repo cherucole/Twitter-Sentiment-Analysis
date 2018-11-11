@@ -26,10 +26,10 @@ def getdata(input_hashtag):
     tweets_pos = []
     tweets_neg = []
     tweets_nut = []
-    general_location = []
-    time_negative = {}
-    time_neutral = {}
-    time_positive = {}
+    # general_location = []
+    # time_negative = {}
+    # time_neutral = {}
+    # time_positive = {}
     # if len(Tweets) < 1:
     #     print("no tweets for now")
     # else:
@@ -64,7 +64,7 @@ def getdata(input_hashtag):
         followers = tweet.user.followers_count
         retweets = tweet.retweet_count
         likes = tweet.favorite_count
-        general_location.append(tweet.user.location)
+        # general_location.append(tweet.user.location)
         blob = TextBlob(tweet.text)
         if blob.sentiment.polarity < 0:
             tweet_full = []
@@ -122,10 +122,10 @@ def getdata(input_hashtag):
         'Negative_tweets': tweets_neg,
         'Neutral_tweets': tweets_nut,
         'Postive_tweets': tweets_pos,
-        'general_location': general_location,
-        'time_negative': time_negative,
-        'time_neutral': time_neutral,
-        'time_positive': time_positive
+        # 'general_location': general_location,
+        # 'time_negative': time_negative,
+        # 'time_neutral': time_neutral,
+        # 'time_positive': time_positive
 
     }
     # print(post)
