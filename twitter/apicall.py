@@ -64,6 +64,7 @@ def getdata(input_hashtag):
         followers = tweet.user.followers_count
         retweets = tweet.retweet_count
         likes = tweet.favorite_count
+        tweet_id = tweet.id_str
         # general_location.append(tweet.user.location)
         blob = TextBlob(tweet.text)
         if blob.sentiment.polarity < 0:
@@ -77,6 +78,9 @@ def getdata(input_hashtag):
             tweet_full['followers'] = (followers)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
+            tweet_full['tweet_id'] = (tweet_id)
+
+            tweet_id
 
             tweets_neg.append(tweet_full)
             # time_negative[tweet.created_at] = tweet.text
@@ -91,6 +95,7 @@ def getdata(input_hashtag):
             tweet_full['followers'] = (followers)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
+            tweet_full['tweet_id'] = (tweet_id)
 
             tweets_nut.append(tweet_full)
 
@@ -107,6 +112,7 @@ def getdata(input_hashtag):
             tweet_full['followers'] = (followers)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
+            tweet_full['tweet_id'] = (tweet_id)
 
             tweets_pos.append(tweet_full)
             # time_positive[tweet.created_at] = tweet.text

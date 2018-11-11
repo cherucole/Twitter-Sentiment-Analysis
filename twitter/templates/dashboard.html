@@ -145,6 +145,14 @@
                     <p> likes : {{ value | safe}} </p>
                     {% endif %}
 
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
+                    {% endif %}
+
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View web Tweet</a>
+                    {% endif %}
+
                     {% endfor %}
 
                 </div>
@@ -182,6 +190,13 @@
                     <p> likes : {{ value | safe}} </p>
                     {% endif %}
 
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
+                    {% endif %}
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View web Tweet</a>
+                    {% endif %}
+
                     {% endfor %}
                 </div>
 
@@ -217,6 +232,16 @@
                     {% if key == 'likes' %}
                     <p> likes : {{ value | safe}} </p>
                     {% endif %}
+
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
+                    {% endif %}
+
+                    {% if key == 'tweet_id' %}
+                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View web Tweet</a>
+                    {% endif %}
+
+
 
                     {% endfor %}
                 </div>
