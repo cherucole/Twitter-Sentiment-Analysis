@@ -14,7 +14,7 @@ def getdata(input_hashtag):
 
     N = 5  # number of tweets
     # Tweets = api.user_timeline(id=input_hashtag, count=N)
-    Tweets = tweepy.Cursor(api.search, q=input_hashtag,
+    Tweets = tweepy.Cursor(api.search, q=input_hashtag, tweet_mode='extended',
                            lang="en").items(N)
     # Tweets = api.geo_search(query='Kenya', granularity="country")
     # print(Tweets.text[0])
@@ -47,7 +47,7 @@ def getdata(input_hashtag):
         print('retweets are: ' + str(tweet.retweet_count))
         # number of tweet favourites
         print('favs are: ' + str(tweet.favorite_count))
-        print(tweet.text)  # tweet itself
+        print(tweet.full_text)  # tweet itself
         # print('retweets are: ' + str(tweet.retweet_count))
         # print('favs are: ' + str(tweet.favorite_count))
 
@@ -66,13 +66,13 @@ def getdata(input_hashtag):
         likes = tweet.favorite_count
         tweet_id = tweet.id_str
         # general_location.append(tweet.user.location)
-        blob = TextBlob(tweet.text)
+        blob = TextBlob(tweet.full_text)
         if blob.sentiment.polarity < 0:
             tweet_full = {}
             negative += blob.sentiment.polarity
             negative_count += 1
             # tweets_neg.append(tweet.text)
-            tweet_full['tweet'] = (tweet.text)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
             tweet_full['followers'] = (followers)
@@ -89,7 +89,7 @@ def getdata(input_hashtag):
 
             neutral_count += 1
             # tweets_nut.append(tweet.text)
-            tweet_full['tweet'] = (tweet.text)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
             tweet_full['followers'] = (followers)
@@ -106,7 +106,7 @@ def getdata(input_hashtag):
 
             postive_count += 1
             # tweets_pos.append(tweet.text)
-            tweet_full['tweet'] = (tweet.text)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
             tweet_full['followers'] = (followers)

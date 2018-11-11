@@ -124,7 +124,7 @@
                     <!-- <img src="https://twitter.com/sqlpowershell/profile_image?size=original" alt=""> -->
                     {% for key,value in tweet.items %}
                     {% if key == 'username' %}
-                    <p> username is : {{ value | safe}} </p>
+                    <p> username is : @{{ value | safe}} </p>
                     {% endif %}
 
 
