@@ -12,9 +12,13 @@ def getdata(input_hashtag):
 
     api = tweepy.API(auth)
 
-    N = 5  # number of tweets
+
+# q='input_hashtag -filter:retweets'
+    N = 50  # number of tweets
+    quiz = input_hashtag + ' -filter:retweets'
+    print(quiz)
     # Tweets = api.user_timeline(id=input_hashtag, count=N)
-    Tweets = tweepy.Cursor(api.search, q=input_hashtag, tweet_mode='extended',
+    Tweets = tweepy.Cursor(api.search, q=quiz, tweet_mode='extended',
                            lang="en").items(N)
     # Tweets = api.geo_search(query='Kenya', granularity="country")
     # print(Tweets.text[0])
