@@ -67,46 +67,46 @@ def getdata(input_hashtag):
         # general_location.append(tweet.user.location)
         blob = TextBlob(tweet.text)
         if blob.sentiment.polarity < 0:
-            tweet_full = []
+            tweet_full = {}
             negative += blob.sentiment.polarity
             negative_count += 1
             # tweets_neg.append(tweet.text)
-            tweet_full.append(tweet.text)
-            tweet_full.append(username)
-            tweet_full.append(avatar)
-            tweet_full.append(followers)
-            tweet_full.append(retweets)
-            tweet_full.append(likes)
+            tweet_full['tweet'] = (tweet.text)
+            tweet_full['username'] = (username)
+            tweet_full['avatar'] = (avatar)
+            tweet_full['followers'] = (followers)
+            tweet_full['retweets'] = (retweets)
+            tweet_full['likes'] = (likes)
 
             tweets_neg.append(tweet_full)
             # time_negative[tweet.created_at] = tweet.text
         elif blob.sentiment.polarity == 0:
-            tweet_full = []
+            tweet_full = {}
 
             neutral_count += 1
             # tweets_nut.append(tweet.text)
-            tweet_full.append(tweet.text)
-            tweet_full.append(username)
-            tweet_full.append(avatar)
-            tweet_full.append(followers)
-            tweet_full.append(retweets)
-            tweet_full.append(likes)
+            tweet_full['tweet'] = (tweet.text)
+            tweet_full['username'] = (username)
+            tweet_full['avatar'] = (avatar)
+            tweet_full['followers'] = (followers)
+            tweet_full['retweets'] = (retweets)
+            tweet_full['likes'] = (likes)
 
             tweets_nut.append(tweet_full)
 
             # time_neutral[tweet.created_at] = tweet.text
         else:
             positive += blob.sentiment.polarity
-            tweet_full = []
+            tweet_full = {}
 
             postive_count += 1
             # tweets_pos.append(tweet.text)
-            tweet_full.append(tweet.text)
-            tweet_full.append(username)
-            tweet_full.append(avatar)
-            tweet_full.append(followers)
-            tweet_full.append(retweets)
-            tweet_full.append(likes)
+            tweet_full['tweet'] = (tweet.text)
+            tweet_full['username'] = (username)
+            tweet_full['avatar'] = (avatar)
+            tweet_full['followers'] = (followers)
+            tweet_full['retweets'] = (retweets)
+            tweet_full['likes'] = (likes)
 
             tweets_pos.append(tweet_full)
             # time_positive[tweet.created_at] = tweet.text
