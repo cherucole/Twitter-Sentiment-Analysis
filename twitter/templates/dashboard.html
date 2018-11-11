@@ -127,8 +127,22 @@
                     <p> username is : {{ value | safe}} </p>
                     {% endif %}
 
+
                     {% if key == 'avatar' %}
                     <img src="{{ value}}" alt="">
+                    {% endif %}
+
+                    {% if key == 'followers' %}
+                    <p> followers : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'tweet' %}
+                    <p>{{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'retweets' %}
+                    <p> retweets : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'likes' %}
+                    <p> likes : {{ value | safe}} </p>
                     {% endif %}
 
                     {% endfor %}
@@ -155,6 +169,19 @@
                     <img src="{{ value}}" alt="">
                     {% endif %}
 
+                    {% if key == 'followers' %}
+                    <p> followers : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'tweet' %}
+                    <p>{{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'retweets' %}
+                    <p> retweets : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'likes' %}
+                    <p> likes : {{ value | safe}} </p>
+                    {% endif %}
+
                     {% endfor %}
                 </div>
 
@@ -176,6 +203,19 @@
 
                     {% if key == 'avatar' %}
                     <img src="{{ value}}" alt="">
+                    {% endif %}
+
+                    {% if key == 'followers' %}
+                    <p> followers : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'tweet' %}
+                    <p>{{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'retweets' %}
+                    <p> retweets : {{ value | safe}} </p>
+                    {% endif %}
+                    {% if key == 'likes' %}
+                    <p> likes : {{ value | safe}} </p>
                     {% endif %}
 
                     {% endfor %}
