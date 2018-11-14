@@ -76,7 +76,7 @@ def getdata(input_hashtag):
             negative += blob.sentiment.polarity
             negative_count += 1
             # tweets_neg.append(tweet.text)
-            tweet_full['avatar'] = (avatar)
+            tweet_full['avatar'] = (avatar)  #order of dictionary matters as that is how items will be ordered on html regardless of what order you call them on html
             tweet_full['username'] = (username)
             tweet_full['followers'] = (followers)
             tweet_full['tweet'] = (tweet.full_text)
@@ -108,7 +108,7 @@ def getdata(input_hashtag):
 
             postive_count += 1
             # tweets_pos.append(tweet.text)
-            tweet_full['avatar'] = (avatar)
+            tweet_full['avatar'] = (avatar) 
             tweet_full['username'] = (username)
             tweet_full['followers'] = (followers)
             tweet_full['tweet'] = (tweet.full_text)
