@@ -174,7 +174,7 @@ def get_pdf(request, username, *args, **kwargs):
     pdf = render_to_pdf('pdf/reports.html', context)
     if pdf:
         response = HttpResponse(pdf, content_type='application/pdf')
-        filename = "Invoice_%s.pdf" % ("12341231")
+        filename = "Reports_%s.pdf" % ("12341231")
         content = "inline; filename='%s'" % (filename)
         download = request.GET.get("download")
         if download:
