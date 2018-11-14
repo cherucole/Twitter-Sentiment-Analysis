@@ -76,15 +76,13 @@ def getdata(input_hashtag):
             negative += blob.sentiment.polarity
             negative_count += 1
             # tweets_neg.append(tweet.text)
-            tweet_full['tweet'] = (tweet.full_text)
-            tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
+            tweet_full['username'] = (username)
             tweet_full['followers'] = (followers)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
             tweet_full['tweet_id'] = (tweet_id)
-
-            tweet_id
 
             tweets_neg.append(tweet_full)
             # time_negative[tweet.created_at] = tweet.text
@@ -93,10 +91,10 @@ def getdata(input_hashtag):
 
             neutral_count += 1
             # tweets_nut.append(tweet.text)
-            tweet_full['tweet'] = (tweet.full_text)
-            tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
+            tweet_full['username'] = (username)
             tweet_full['followers'] = (followers)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
             tweet_full['tweet_id'] = (tweet_id)
@@ -110,10 +108,10 @@ def getdata(input_hashtag):
 
             postive_count += 1
             # tweets_pos.append(tweet.text)
-            tweet_full['tweet'] = (tweet.full_text)
-            tweet_full['username'] = (username)
             tweet_full['avatar'] = (avatar)
+            tweet_full['username'] = (username)
             tweet_full['followers'] = (followers)
+            tweet_full['tweet'] = (tweet.full_text)
             tweet_full['retweets'] = (retweets)
             tweet_full['likes'] = (likes)
             tweet_full['tweet_id'] = (tweet_id)

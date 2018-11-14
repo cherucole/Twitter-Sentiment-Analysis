@@ -128,9 +128,7 @@
                     {% endif %}
 
 
-                    {% if key == 'avatar' %}
-                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
-                    {% endif %}
+
 
                     {% if key == 'followers' %}
                     <p> followers : {{ value | safe}} </p>
@@ -151,6 +149,9 @@
 
                     {% if key == 'tweet_id' %}
                     <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View web Tweet</a>
+                    {% endif %}
+                    {% if key == 'avatar' %}
+                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
                     {% endif %}
 
                     {% endfor %}
@@ -354,9 +355,9 @@
         position: relative;
     }
 
-    p {
+    /* p {
         text-align: center;
-    }
+    } */
 
     .label {
         height: 1em;
