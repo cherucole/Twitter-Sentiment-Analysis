@@ -15,8 +15,6 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True, default=1)
 
-    # neighborhood = models.ForeignKey(Neighborhood, default=6)
-
     def __str__(self):
         return self.user.username
 
@@ -43,11 +41,6 @@ class Profile(models.Model):
     def filter_by_id(cls, id):
         profile = Profile.objects.filter(user=id).first()
         return profile
-
-    # @classmethod
-    # def get_profile_reports(cls, id):
-    #     user_reports = SentimentsTwitterHashtag.objects.all()
-    #     return user_reports
 
 
 class SentimentsTwitterHashtag(models.Model):

@@ -123,36 +123,38 @@
                 <div class="card-body">
                     <!-- <img src="https://twitter.com/sqlpowershell/profile_image?size=original" alt=""> -->
                     {% for key,value in tweet.items %}
+                    {% if key == 'avatar' %}
+                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
+                    {% endif %}
+
                     {% if key == 'username' %}
                     <p> username is : @{{ value | safe}} </p>
                     {% endif %}
 
-
-
-
                     {% if key == 'followers' %}
                     <p> followers : {{ value | safe}} </p>
                     {% endif %}
+
                     {% if key == 'tweet' %}
                     <p>{{ value | safe}} </p>
                     {% endif %}
+
                     {% if key == 'retweets' %}
                     <p> retweets : {{ value | safe}} </p>
                     {% endif %}
+
                     {% if key == 'likes' %}
                     <p> likes : {{ value | safe}} </p>
                     {% endif %}
-
+                    <!-- 
                     {% if key == 'tweet_id' %}
                     <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
-                    {% endif %}
+                    {% endif %} -->
 
                     {% if key == 'tweet_id' %}
-                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View web Tweet</a>
+                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
                     {% endif %}
-                    {% if key == 'avatar' %}
-                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
-                    {% endif %}
+
 
                     {% endfor %}
 
