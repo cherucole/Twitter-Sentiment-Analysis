@@ -161,15 +161,20 @@
                             <p class="card-text">{{ value | safe}}</p>
                             {% endif %}
 
+
+
                             {% if key == 'retweets' %}
-                            <p> <img class="site__img" src="{% static 'images/retweets.png' %}" style="height:1.4rem;width:1.4rem;">
+                            <a href="#" style="color:blue;" class="card-link">Retweets <img class="site__img" src="{% static 'images/retweets.png' %}"
+                                    style="height:1.4rem;width:1.4rem;"> : {{ value | safe}}</a>
+
+                            <!-- <p> <img class="site__img" src="{% static 'images/retweets.png' %}" style="height:1.4rem;width:1.4rem;">
                                 : {{ value | safe}}
-                            </p>
+                            </p> -->
                             {% endif %}
 
                             {% if key == 'likes' %}
-                            <p> <img class="site__img" src="{% static 'images/like.png' %}" style="height:1.4rem;width:1.5rem;">:
-                                {{ value | safe}} </p>
+                            <a href="#" style="color:blue;" class="card-link">Likes <img class="site__img" src="{% static 'images/like.png' %}"
+                                    style="height:1.4rem;width:1.5rem;"> : {{ value | safe}}</a>
                             {% endif %}
                             <!-- 
                     {% if key == 'tweet_id' %}
