@@ -121,14 +121,31 @@
                 </div>
                 {% for tweet in postive_tweets %}
                 <div class="card-body">
-                    <!-- <img src="https://twitter.com/sqlpowershell/profile_image?size=original" alt=""> -->
                     {% for key,value in tweet.items %}
+
+
+
+
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the
+                                bulk of the card's content.</p>
+                            <a href="#" class="btn btn-outline-primary btn-sm">View Tweet</a>
+
+                        </div>
+                    </div>
+
+
+
+
                     {% if key == 'avatar' %}
                     <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
                     {% endif %}
 
                     {% if key == 'username' %}
-                    <p> username is : @{{ value | safe}} </p>
+                    <p> @{{ value | safe}} </p>
                     {% endif %}
 
                     {% if key == 'followers' %}
@@ -173,7 +190,7 @@
                 <div class="card-body">
                     {% for key,value in tweet.items %}
                     {% if key == 'username' %}
-                    <p> username is : {{ value | safe}} </p>
+                    <p> @{{ value | safe}} </p>
                     {% endif %}
 
                     {% if key == 'avatar' %}
@@ -216,7 +233,7 @@
                 <div class="card-body">
                     {% for key,value in tweet.items %}
                     {% if key == 'username' %}
-                    <p> username is : {{ value | safe}} </p>
+                    <p> @{{ value | safe}} </p>
                     {% endif %}
 
                     {% if key == 'avatar' %}
