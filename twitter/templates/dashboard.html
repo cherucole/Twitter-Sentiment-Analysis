@@ -161,7 +161,10 @@
                             <p class="card-text">{{ value | safe}}</p>
                             {% endif %}
 
-
+                            {% if key == 'tweet_id' %}
+                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}" class="btn btn-outline-primary btn-sm">View
+                                Tweet</a>
+                            {% endif %}
 
                             {% if key == 'retweets' %}
                             <a href="#" style="color:blue;" class="card-link">Retweets <img class="site__img" src="{% static 'images/retweets.png' %}"
@@ -181,10 +184,7 @@
                     <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
                     {% endif %} -->
 
-                            {% if key == 'tweet_id' %}
-                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}" class="btn btn-outline-primary btn-sm">View
-                                Tweet</a>
-                            {% endif %}
+
 
 
                             {% endfor %}
