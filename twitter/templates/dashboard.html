@@ -203,36 +203,74 @@
                 </div>
                 {% for tweet in neutral_tweets %}
                 <div class="card-body">
-                    {% for key,value in tweet.items %}
-                    {% if key == 'username' %}
-                    <p> @{{ value | safe}} </p>
-                    {% endif %}
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
 
-                    {% if key == 'avatar' %}
-                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
-                    {% endif %}
+                            {% for key,value in tweet.items %}
 
-                    {% if key == 'followers' %}
-                    <p> followers : {{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'tweet' %}
-                    <p>{{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'retweets' %}
-                    <p> retweets : {{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'likes' %}
-                    <p> likes : {{ value | safe}} </p>
-                    {% endif %}
 
-                    <!-- {% if key == 'tweet_id' %}
-                    <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
-                    {% endif %} -->
-                    {% if key == 'tweet_id' %}
-                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
-                    {% endif %}
 
-                    {% endfor %}
+
+                            <!-- <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Tweet</a>
+    
+                            </div>
+                        </div> -->
+
+
+
+
+                            {% if key == 'avatar' %}
+                            <h5 class="card-title"><img src="{{ value}}" alt="" class="rounded-circle img-fluid"></h5>
+                            {% endif %}
+
+                            {% if key == 'username' %}
+                            <h6 class="card-subtitle mb-2 text-muted">@{{ value | safe}}</h6>
+                            {% endif %}
+
+                            {% if key == 'followers' %}
+                            <p class="text-muted"> Followers : {{ value | safe}} </p>
+                            {% endif %}
+
+                            {% if key == 'tweet' %}
+
+                            <p class="card-text">{{ value | safe}}</p>
+                            {% endif %}
+
+                            {% if key == 'tweet_id' %}
+                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}" class="btn btn-outline-primary btn-sm">View
+                                Tweet</a>
+                            {% endif %}
+
+                            {% if key == 'retweets' %}
+                            <a href="#" style="color:blue;" class="card-link">Retweets <img class="site__img" src="{% static 'images/retweets.png' %}"
+                                    style="height:1.4rem;width:1.4rem;"> : {{ value | safe}}</a>
+
+                            <!-- <p> <img class="site__img" src="{% static 'images/retweets.png' %}" style="height:1.4rem;width:1.4rem;">
+                                    : {{ value | safe}}
+                                </p> -->
+                            {% endif %}
+
+                            {% if key == 'likes' %}
+                            <a href="#" style="color:blue;" class="card-link">Likes <img class="site__img" src="{% static 'images/like.png' %}"
+                                    style="height:1.4rem;width:1.5rem;"> : {{ value | safe}}</a>
+                            {% endif %}
+                            <!-- 
+                        {% if key == 'tweet_id' %}
+                        <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
+                        {% endif %} -->
+
+
+
+
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
 
                 {% endfor %}
@@ -246,37 +284,74 @@
                 </div>
                 {% for tweet in negative_tweets %}
                 <div class="card-body">
-                    {% for key,value in tweet.items %}
-                    {% if key == 'username' %}
-                    <p> @{{ value | safe}} </p>
-                    {% endif %}
+                    <div class="card" style="width: 100%;">
+                        <div class="card-body">
 
-                    {% if key == 'avatar' %}
-                    <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
-                    {% endif %}
+                            {% for key,value in tweet.items %}
 
-                    {% if key == 'followers' %}
-                    <p> followers : {{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'tweet' %}
-                    <p>{{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'retweets' %}
-                    <p> retweets : {{ value | safe}} </p>
-                    {% endif %}
-                    {% if key == 'likes' %}
-                    <p> likes : {{ value | safe}} </p>
-                    {% endif %}
 
-                    <!-- {% if key == 'tweet_id' %}
-                    <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
-                    {% endif %} -->
 
-                    {% if key == 'tweet_id' %}
-                    <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
-                    {% endif %}
 
-                    {% endfor %}
+                            <!-- <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk of the card's content.</p>
+                                <a href="#" class="btn btn-outline-primary btn-sm">View Tweet</a>
+    
+                            </div>
+                        </div> -->
+
+
+
+
+                            {% if key == 'avatar' %}
+                            <h5 class="card-title"><img src="{{ value}}" alt="" class="rounded-circle img-fluid"></h5>
+                            {% endif %}
+
+                            {% if key == 'username' %}
+                            <h6 class="card-subtitle mb-2 text-muted">@{{ value | safe}}</h6>
+                            {% endif %}
+
+                            {% if key == 'followers' %}
+                            <p class="text-muted"> Followers : {{ value | safe}} </p>
+                            {% endif %}
+
+                            {% if key == 'tweet' %}
+
+                            <p class="card-text">{{ value | safe}}</p>
+                            {% endif %}
+
+                            {% if key == 'tweet_id' %}
+                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}" class="btn btn-outline-primary btn-sm">View
+                                Tweet</a>
+                            {% endif %}
+
+                            {% if key == 'retweets' %}
+                            <a href="#" style="color:blue;" class="card-link">Retweets <img class="site__img" src="{% static 'images/retweets.png' %}"
+                                    style="height:1.4rem;width:1.4rem;"> : {{ value | safe}}</a>
+
+                            <!-- <p> <img class="site__img" src="{% static 'images/retweets.png' %}" style="height:1.4rem;width:1.4rem;">
+                                    : {{ value | safe}}
+                                </p> -->
+                            {% endif %}
+
+                            {% if key == 'likes' %}
+                            <a href="#" style="color:blue;" class="card-link">Likes <img class="site__img" src="{% static 'images/like.png' %}"
+                                    style="height:1.4rem;width:1.5rem;"> : {{ value | safe}}</a>
+                            {% endif %}
+                            <!-- 
+                        {% if key == 'tweet_id' %}
+                        <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
+                        {% endif %} -->
+
+
+
+
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
 
                 {% endfor %}
