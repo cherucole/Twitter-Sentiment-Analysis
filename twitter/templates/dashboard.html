@@ -123,12 +123,14 @@
 
                 <div class="card-body">
                     <div class="card" style="width: 100%;">
-                        {% for key,value in tweet.items %}
+                        <div class="card-body">
+
+                            {% for key,value in tweet.items %}
 
 
 
 
-                        <!-- <div class="card" style="width: 100%;">
+                            <!-- <div class="card" style="width: 100%;">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
                             <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -142,41 +144,42 @@
 
 
 
-                        {% if key == 'avatar' %}
-                        <img src="{{ value}}" alt="" class="rounded-circle img-fluid">
-                        {% endif %}
+                            {% if key == 'avatar' %}
+                            <h5 class="card-title"><img src="{{ value}}" alt="" class="rounded-circle img-fluid"></h5>
 
-                        {% if key == 'username' %}
-                        <p> @{{ value | safe}} </p>
-                        {% endif %}
+                            {% endif %}
 
-                        {% if key == 'followers' %}
-                        <p> followers : {{ value | safe}} </p>
-                        {% endif %}
+                            {% if key == 'username' %}
+                            <p> @{{ value | safe}} </p>
+                            {% endif %}
 
-                        {% if key == 'tweet' %}
-                        <p>{{ value | safe}} </p>
-                        {% endif %}
+                            {% if key == 'followers' %}
+                            <p> followers : {{ value | safe}} </p>
+                            {% endif %}
 
-                        {% if key == 'retweets' %}
-                        <p> retweets : {{ value | safe}} </p>
-                        {% endif %}
+                            {% if key == 'tweet' %}
+                            <p>{{ value | safe}} </p>
+                            {% endif %}
 
-                        {% if key == 'likes' %}
-                        <p> likes : {{ value | safe}} </p>
-                        {% endif %}
-                        <!-- 
+                            {% if key == 'retweets' %}
+                            <p> retweets : {{ value | safe}} </p>
+                            {% endif %}
+
+                            {% if key == 'likes' %}
+                            <p> likes : {{ value | safe}} </p>
+                            {% endif %}
+                            <!-- 
                     {% if key == 'tweet_id' %}
                     <a target="blank" href="https://twitter.com/statuses/{{value}}">View Tweet</a>
                     {% endif %} -->
 
-                        {% if key == 'tweet_id' %}
-                        <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
-                        {% endif %}
+                            {% if key == 'tweet_id' %}
+                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
+                            {% endif %}
 
 
-                        {% endfor %}
-
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 
