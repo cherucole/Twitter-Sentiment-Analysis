@@ -122,7 +122,7 @@
                 {% for tweet in postive_tweets %}
 
                 <div class="card-body">
-                    <div class="card" style="width: 100%;">
+                    <div class="card" id="content" style="width: 100%;">
                         <div class="card-body">
 
                             {% for key,value in tweet.items %}
@@ -203,7 +203,7 @@
                 </div>
                 {% for tweet in neutral_tweets %}
                 <div class="card-body">
-                    <div class="card" style="width: 100%;">
+                    <div class="card" id="content" style="width: 100%;">
                         <div class="card-body">
 
                             {% for key,value in tweet.items %}
@@ -284,7 +284,7 @@
                 </div>
                 {% for tweet in negative_tweets %}
                 <div class="card-body">
-                    <div class="card" style="width: 100%;">
+                    <div class="card" id="content" style="width: 100%;">
                         <div class="card-body">
 
                             {% for key,value in tweet.items %}
@@ -438,8 +438,16 @@
 
     .card {
         box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+
+    #content {
+
+        background-color: #F5F5F5 !important;
 
     }
+
+
+
 
     h2 {
         color: white;
