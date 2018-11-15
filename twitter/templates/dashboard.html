@@ -162,11 +162,14 @@
                             {% endif %}
 
                             {% if key == 'retweets' %}
-                            <p> retweets : {{ value | safe}} </p>
+                            <p> <img class="site__img" src="{% static 'images/retweets.png' %}" style="height:1.4rem;width:1.4rem;">
+                                : {{ value | safe}}
+                            </p>
                             {% endif %}
 
                             {% if key == 'likes' %}
-                            <p> likes : {{ value | safe}} </p>
+                            <p> <img class="site__img" src="{% static 'images/like.png' %}" style="height:1.4rem;width:1.5rem;">:
+                                {{ value | safe}} </p>
                             {% endif %}
                             <!-- 
                     {% if key == 'tweet_id' %}
