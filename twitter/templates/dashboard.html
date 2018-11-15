@@ -146,11 +146,10 @@
 
                             {% if key == 'avatar' %}
                             <h5 class="card-title"><img src="{{ value}}" alt="" class="rounded-circle img-fluid"></h5>
-
                             {% endif %}
 
                             {% if key == 'username' %}
-                            <p> @{{ value | safe}} </p>
+                            <h6 class="card-subtitle mb-2 text-muted">@{{ value | safe}}</h6>
                             {% endif %}
 
                             {% if key == 'followers' %}
@@ -158,7 +157,8 @@
                             {% endif %}
 
                             {% if key == 'tweet' %}
-                            <p>{{ value | safe}} </p>
+
+                            <p class="card-text">{{ value | safe}}</p>
                             {% endif %}
 
                             {% if key == 'retweets' %}
@@ -174,7 +174,8 @@
                     {% endif %} -->
 
                             {% if key == 'tweet_id' %}
-                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}">View Tweet</a>
+                            <a target="blank" href="https://twitter.com/i/web/status/{{value}}" class="btn btn-outline-primary btn-sm">View
+                                Tweet</a>
                             {% endif %}
 
 
